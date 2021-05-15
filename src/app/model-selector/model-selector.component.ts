@@ -18,7 +18,7 @@ export class ModelSelectorComponent implements OnInit {
   ngOnInit() {
   }
 
-  public selectModel(model: Model) {
+  selectModel(model: Model) {
     this.selectedModel = model;
     this.modelSelected.emit(this.selectedModel);
   }
