@@ -10,10 +10,16 @@ import {Model} from "../app.model";
 export class ModelSelectorComponent implements OnInit {
   @Input() models: Model[];
   @Output() modelSelected = new EventEmitter<Model>();
+  selectedModel: Model;
 
   constructor() {
   }
 
   ngOnInit() {
+  }
+
+  public selectModel(model: Model) {
+    this.selectedModel = model;
+    this.modelSelected.emit(this.selectedModel);
   }
 }

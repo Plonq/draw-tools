@@ -1,2 +1,3 @@
-<button model-selector-item *ngFor="let model of models" [model]="model" (click)="modelSelected.emit(model)">
+<button model-selector-item *ngFor="let model of models" [model]="model" [class.active]="selectedModel === model"
+        (click)="selectModel(model)">
 </button>

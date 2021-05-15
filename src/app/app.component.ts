@@ -2,17 +2,17 @@ import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {
   ArcRotateCamera,
   AssetContainer, Camera,
-  DirectionalLight,
   Engine,
   HemisphericLight, PointLight,
   Scene,
-  SceneLoader, SpotLight, TransformNode,
+  SceneLoader,
   Vector3
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 import "pepjs";
 import {MODELS} from "./app.constants";
 import {Model} from "./app.model";
+import {ModelSelectorComponent} from "./model-selector/model-selector.component";
 
 @Component({
   selector: 'app-root',
@@ -28,6 +28,8 @@ export class AppComponent implements AfterViewInit {
   currentModel: Model;
   private camera: ArcRotateCamera;
   private light: PointLight;
+
+  @ViewChild(ModelSelectorComponent) private modelSelector: ModelSelectorComponent;
 
   ngAfterViewInit() {
     this.engine = new Engine(this.canvas.nativeElement, true, {
@@ -55,46 +57,49 @@ export class AppComponent implements AfterViewInit {
     this.camera.attachControl(this.canvas, true);
     this.light = this.createLight(this.scene, this.camera);
 
-    this.engine.hideLoadingUI();
-
     this.scene.registerBeforeRender(() => {
       this.light.position = this.camera.position;
     });
+
+    this.modelSelector.selectModel(this.models[0]);
   }
 
   loadModel(model: Model) {
+    this.engine.displayLoadingUI();
+
     this.container?.removeAllFromScene();
     return SceneLoader.LoadAssetContainerAsync(
       model.rootUrl,
       model.sceneFile,
       this.scene
     ).then(container => {
-      // this.camera.target = meshes[0]
       this.container = container;
       container.addAllToScene();
       this.currentModel = model;
-      // return meshes;
       this.camera.target = container.meshes[0].position;
+
+      // Assume first mesh is root
+      const rootMesh = container.meshes[0];
+      rootMesh.rotation = model.rotationCorrection;
+      for (let mesh of container.meshes) {
+        mesh.scaling = new Vector3(model.scaleCorrection, model.scaleCorrection, model.scaleCorrection);
+      }
+
+      this.engine.hideLoadingUI();
     })
   }
 
   private createCamera(scene: Scene) {
-    const alpha = Math.PI / 2;
-    const beta = Math.PI / 2;
     const camera = new ArcRotateCamera(
       'camera',
-      alpha,
-      beta,
+      0,
+      Math.PI / 2,
       30,
       Vector3.Zero(),
       scene
     );
 
-    // camera.lowerAlphaLimit = alpha;
-    // camera.upperAlphaLimit = alpha;
-    // camera.lowerBetaLimit = beta;
-    // camera.upperBetaLimit = beta;
-    camera.lowerRadiusLimit = 10;
+    camera.lowerRadiusLimit = 8;
     camera.upperRadiusLimit = 100;
     camera.wheelPrecision = 15; // Higher is less sensitive
 
