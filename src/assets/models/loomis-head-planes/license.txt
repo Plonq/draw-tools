@@ -1,0 +1,11 @@
+Model Information:
+* title:	Loomis Head - Planes & essential form
+* source:	https://sketchfab.com/3d-models/loomis-head-planes-essential-form-bfab6627f7104d69a58b9b211ba5943f
+* author:	cgmonkey (https://sketchfab.com/cgmonkey)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Loomis Head - Planes & essential form" (https://sketchfab.com/3d-models/loomis-head-planes-essential-form-bfab6627f7104d69a58b9b211ba5943f) by cgmonkey (https://sketchfab.com/cgmonkey) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
