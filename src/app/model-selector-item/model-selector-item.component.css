@@ -4,14 +4,14 @@
   color: white;
   border: none;
   margin-right: 16px;
-  height: 200px;
-  flex-basis: 200px;
+  height: 150px;
+  flex-basis: 150px;
   background-size: cover;
   cursor: pointer;
 }
 
 :host.active {
-  border: 2px solid white;
+  box-shadow: 0 0 0 2px white;
 }
 
 span {
@@ -25,7 +25,7 @@ span {
   align-items: flex-end;
   justify-content: center;
   text-shadow: 0 0 10px hsla(0, 0%, 0%, 0.61);;
-  font-size: 18px;
+  font-size: 16px;
   background-image: linear-gradient(
     0deg,
     hsla(0, 0%, 0%, 0.3),
