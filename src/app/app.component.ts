@@ -65,8 +65,6 @@ export class AppComponent implements AfterViewInit {
   }
 
   loadModel(model: Model) {
-    this.engine.displayLoadingUI();
-
     this.container?.removeAllFromScene();
     return SceneLoader.LoadAssetContainerAsync(
       model.rootUrl,
