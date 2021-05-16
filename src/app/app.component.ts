@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {
   ArcRotateCamera,
   AssetContainer, Camera,
@@ -20,7 +20,7 @@ import {filter} from "rxjs/operators";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit, AfterContentInit {
   private engine: Engine;
   @ViewChild("canvas", {static: true}) private canvas: ElementRef<HTMLCanvasElement>;
   private scene: Scene;
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.appService.currentModel$.pipe(filter(model => model !== null)).subscribe(model => this.loadModel(model))
   }
 
-  ngAfterViewInit() {
+  ngAfterContentInit() {
     this.engine = new Engine(this.canvas.nativeElement, true, {
       preserveDrawingBuffer: true,
       stencil: true,
