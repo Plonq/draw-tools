@@ -1,6 +1,7 @@
-import {Component, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Model} from "../app.model";
 import {ModelSelectorComponent} from "../model-selector/model-selector.component";
+import {AppService} from "../app.service";
 
 @Component({
   selector: 'gui',
@@ -11,36 +12,16 @@ import {ModelSelectorComponent} from "../model-selector/model-selector.component
 export class GuiComponent implements OnInit {
   @Input() models: Model[];
   guiVisible: boolean = true;
-  hideTimeout: number;
 
   @ViewChild(ModelSelectorComponent) private modelSelector: ModelSelectorComponent;
 
-  constructor() {
+  constructor(public appService: AppService) {
   }
 
   ngOnInit() {
-    // this.hideTimeout = window.setTimeout(() => {
-    //   this.guiVisible = false
-    // }, 3000)
   }
 
   toggleGui() {
     this.guiVisible = !this.guiVisible;
   }
-
-  // @HostListener("mouseenter")
-  // onMouseEnter() {
-  //   console.log('mouse enter')
-  //   window.clearTimeout(this.hideTimeout);
-  //   this.guiVisible = true;
-  // }
-  //
-  // @HostListener("mouseleave")
-  // onMouseLeave() {
-  //   console.log('mouse leave')
-  //   window.clearTimeout(this.hideTimeout);
-  //   this.hideTimeout = window.setTimeout(() => {
-  //     this.guiVisible = false;
-  //   }, 1000)
-  // }
 }

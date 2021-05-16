@@ -1,4 +1,5 @@
 <button class="collapse" (click)="toggleGui()">{{guiVisible ? '▼' : '▲'}}</button>
 <div class="collapsible" [class.collapsed]="!guiVisible">
+  <div class="credit">{{(appService.currentModel$ | async)?.credit}}</div>
   <model-selector [models]="models"></model-selector>
 </div>

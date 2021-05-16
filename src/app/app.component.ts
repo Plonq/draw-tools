@@ -29,6 +29,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   currentModel: Model;
   private camera: ArcRotateCamera;
   private light: PointLight;
+  creditVisible: boolean = true;
 
   constructor(private appService: AppService) {
   }
@@ -117,5 +118,9 @@ export class AppComponent implements OnInit, AfterContentInit {
 
     light.intensity = 50;
     return light;
+  }
+
+  toggleCredit() {
+    this.creditVisible = !this.creditVisible;
   }
 }
