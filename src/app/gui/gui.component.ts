@@ -1,7 +1,6 @@
-import {Component, HostBinding, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {Model} from "../app.model";
 import {ModelSelectorComponent} from "../model-selector/model-selector.component";
-import {AppService} from "../app.service";
 
 @Component({
   selector: 'gui',

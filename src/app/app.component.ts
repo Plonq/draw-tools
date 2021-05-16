@@ -12,7 +12,6 @@ import "@babylonjs/loaders/glTF";
 import "pepjs";
 import {MODELS} from "./app.constants";
 import {Model} from "./app.model";
-import {ModelSelectorComponent} from "./model-selector/model-selector.component";
 import {AppService} from "./app.service";
 import {filter} from "rxjs/operators";
 

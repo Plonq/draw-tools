@@ -11,7 +11,6 @@ import {AppService} from "../app.service";
 export class ModelSelectorComponent implements OnInit {
   @Input() models: Model[];
   @Output() modelSelected = new EventEmitter<Model>();
-  selectedModel: Model;
 
   constructor(public appService: AppService) {
   }
@@ -21,7 +20,5 @@ export class ModelSelectorComponent implements OnInit {
 
   selectModel(model: Model) {
     this.appService.loadModel(model)
-    // this.selectedModel = model;
-    // this.modelSelected.emit(this.selectedModel);
   }
 }
