@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {
   ArcRotateCamera,
   AssetContainer, Camera,
@@ -13,13 +13,15 @@ import "pepjs";
 import {MODELS} from "./app.constants";
 import {Model} from "./app.model";
 import {ModelSelectorComponent} from "./model-selector/model-selector.component";
+import {AppService} from "./app.service";
+import {filter} from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit {
   private engine: Engine;
   @ViewChild("canvas", {static: true}) private canvas: ElementRef<HTMLCanvasElement>;
   private scene: Scene;
@@ -29,7 +31,12 @@ export class AppComponent implements AfterViewInit {
   private camera: ArcRotateCamera;
   private light: PointLight;
 
-  @ViewChild(ModelSelectorComponent) private modelSelector: ModelSelectorComponent;
+  constructor(private appService: AppService) {
+  }
+
+  ngOnInit() {
+    this.appService.currentModel$.pipe(filter(model => model !== null)).subscribe(model => this.loadModel(model))
+  }
 
   ngAfterViewInit() {
     this.engine = new Engine(this.canvas.nativeElement, true, {
@@ -61,7 +68,7 @@ export class AppComponent implements AfterViewInit {
       this.light.position = this.camera.position;
     });
 
-    this.modelSelector.selectModel(this.models[0]);
+    this.appService.loadModel(this.models[0]);
   }
 
   loadModel(model: Model) {
@@ -107,7 +114,7 @@ export class AppComponent implements AfterViewInit {
   private createLight(scene: Scene, camera: Camera) {
     const ambient = new HemisphericLight('light', new Vector3(0, 1, 0), scene);
     ambient.intensity = 0.5;
-    const light =  new PointLight("Omni", camera.position, scene);
+    const light = new PointLight("Omni", camera.position, scene);
 
     light.intensity = 50;
     return light;

@@ -3,6 +3,4 @@
 </canvas>
 
 <div class="credit">{{currentModel?.credit}}</div>
-<div class="gui">
-  <model-selector [models]="models" (modelSelected)="loadModel($event)"></model-selector>
-</div>
+<gui [models]="models"></gui>

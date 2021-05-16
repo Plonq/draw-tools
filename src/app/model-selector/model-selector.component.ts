@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Model} from "../app.model";
+import {AppService} from "../app.service";
 
 @Component({
   selector: 'model-selector',
@@ -12,14 +13,15 @@ export class ModelSelectorComponent implements OnInit {
   @Output() modelSelected = new EventEmitter<Model>();
   selectedModel: Model;
 
-  constructor() {
+  constructor(public appService: AppService) {
   }
 
   ngOnInit() {
   }
 
   selectModel(model: Model) {
-    this.selectedModel = model;
-    this.modelSelected.emit(this.selectedModel);
+    this.appService.loadModel(model)
+    // this.selectedModel = model;
+    // this.modelSelected.emit(this.selectedModel);
   }
 }
