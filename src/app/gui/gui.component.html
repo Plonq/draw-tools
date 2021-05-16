@@ -1,4 +1,4 @@
-<button class="collapse">{{guiVisible ? '▼' : '▲'}}</button>
+<button class="collapse" (click)="toggleGui()">{{guiVisible ? '▼' : '▲'}}</button>
 <div class="collapsible" [class.collapsed]="!guiVisible">
   <model-selector [models]="models"></model-selector>
 </div>

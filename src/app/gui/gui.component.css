@@ -10,12 +10,19 @@
   border: none;
   background: black;
   width: 100%;
+  height: 40px;
   color: white;
 }
 
+@media screen and (min-width: 800px) {
+  .collapse {
+    height: auto;
+  }
+}
+
 .collapsible {
-  max-height: 1000px;
-  transition: all 0.5s ease;
+  max-height: 500px;
+  /*transition: all 0.5s ease;*/
 }
 
 .collapsed {

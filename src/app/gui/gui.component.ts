@@ -19,22 +19,28 @@ export class GuiComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hideTimeout = window.setTimeout(() => {
-      this.guiVisible = false
-    }, 3000)
+    // this.hideTimeout = window.setTimeout(() => {
+    //   this.guiVisible = false
+    // }, 3000)
   }
 
-  @HostListener("mouseenter")
-  onMouseEnter() {
-    window.clearTimeout(this.hideTimeout);
-    this.guiVisible = true;
+  toggleGui() {
+    this.guiVisible = !this.guiVisible;
   }
 
-  @HostListener("mouseleave")
-  onMouseLeave() {
-    window.clearTimeout(this.hideTimeout);
-    this.hideTimeout = window.setTimeout(() => {
-      this.guiVisible = false;
-    }, 1000)
-  }
+  // @HostListener("mouseenter")
+  // onMouseEnter() {
+  //   console.log('mouse enter')
+  //   window.clearTimeout(this.hideTimeout);
+  //   this.guiVisible = true;
+  // }
+  //
+  // @HostListener("mouseleave")
+  // onMouseLeave() {
+  //   console.log('mouse leave')
+  //   window.clearTimeout(this.hideTimeout);
+  //   this.hideTimeout = window.setTimeout(() => {
+  //     this.guiVisible = false;
+  //   }, 1000)
+  // }
 }

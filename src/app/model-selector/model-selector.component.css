@@ -1,4 +1,5 @@
 :host {
   display: flex;
   padding: 16px;
+  overflow-x: auto;
 }
