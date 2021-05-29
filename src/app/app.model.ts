@@ -1,6 +1,6 @@
-import {Vector3} from "@babylonjs/core";
+import {AbstractMesh, Vector3} from "@babylonjs/core";
 
-export interface Model {
+export interface ModelDefinition {
   name: string;
   rootUrl: string;
   sceneFile: string;
@@ -8,4 +8,5 @@ export interface Model {
   credit: string;
   scaleCorrection: number;
   rotationCorrection: Vector3,
+  rootMesh?: AbstractMesh;
 }

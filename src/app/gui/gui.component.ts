@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Model} from "../app.model";
+import {ModelDefinition} from "../app.model";
 import {ModelSelectorComponent} from "../model-selector/model-selector.component";
 import {AppService} from "../app.service";
 
@@ -10,7 +10,7 @@ import {AppService} from "../app.service";
 })
 
 export class GuiComponent implements OnInit {
-  @Input() models: Model[];
+  @Input() models: ModelDefinition[];
   guiVisible: boolean = true;
 
   @ViewChild(ModelSelectorComponent) private modelSelector: ModelSelectorComponent;

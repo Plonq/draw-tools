@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Model} from "../app.model";
+import {ModelDefinition} from "../app.model";
 
 @Component({
   selector: '[model-selector-item]',
@@ -11,7 +11,7 @@ import {Model} from "../app.model";
 })
 
 export class ModelSelectorItemComponent implements OnInit {
-  @Input() model: Model;
+  @Input() model: ModelDefinition;
 
   constructor() {
   }

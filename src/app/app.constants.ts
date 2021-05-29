@@ -1,7 +1,7 @@
-import {Model} from "./app.model";
+import {ModelDefinition} from "./app.model";
 import {Vector3} from "@babylonjs/core";
 
-export const MODELS: Model[] = [
+export const MODELS: ModelDefinition[] = [
   {
     name: "Loomis Head",
     rootUrl: "/assets/models/loomis-head/",
