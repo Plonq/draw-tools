@@ -1,4 +1,4 @@
-<div class="lights">
+<div class="panel lights">
   <h2>Light Controls</h2>
   <div>Y Rotation</div>
   <mat-slider [min]="minRotation" [max]="maxRotation" [step]="rotationStep" [value]="lightRotation.y" (input)="onLightRotation($event, 'y')"></mat-slider>
@@ -9,7 +9,7 @@
   <div>Ambient Intensity</div>
   <mat-slider [min]="minAmbientIntensity" [max]="maxAmbientIntensity" [step]="ambientIntensityStep" [value]="ambientLightIntensity" (input)="onAmbientLightIntensityChange($event.value)"></mat-slider>
 </div>
-<div class="object">
+<div class="panel object">
   <h2>Object Controls</h2>
   <div>X Rotation</div>
   <mat-slider [min]="minRotation" [max]="maxRotation" [step]="rotationStep" [value]="objectRotation.x" (input)="obObjectRotation($event, 'x')"></mat-slider>

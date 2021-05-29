@@ -7,12 +7,17 @@
   display: grid;
   padding: 24px;
   color: white;
+  pointer-events: none;
   grid-template-areas:
     ". . . . ."
     ". . . . ."
     "lights . . . object"
     ". . . . ."
     ". . . . .";
+}
+
+.panel {
+  pointer-events: initial;
 }
 
 .lights {
