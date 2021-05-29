@@ -6,8 +6,12 @@ html,
 body {
   background-color: lightgray;
   padding: 0;
-  margin: 0;
   height: 100%;
   width: 100%;
   overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

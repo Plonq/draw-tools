@@ -1,0 +1,16 @@
+<div class="lights">
+  <h2>Light Controls</h2>
+  <div>Y Rotation</div>
+  <mat-slider [min]="min" [max]="max" [step]="step" [value]="light?.rotation.y" (input)="onLightRotation($event, 'y')"></mat-slider>
+  <div>Z Rotation</div>
+  <mat-slider [min]="min" [max]="max" [step]="step" [value]="light?.rotation.z" (input)="onLightRotation($event, 'z')"></mat-slider>
+</div>
+<div class="object">
+  <h2>Object Controls</h2>
+  <div>X Rotation</div>
+  <mat-slider [min]="min" [max]="max" [step]="step" [value]="object?.rotation.x" (input)="obObjectRotation($event, 'x')"></mat-slider>
+  <div>Y Rotation</div>
+  <mat-slider [min]="min" [max]="max" [step]="step" [value]="object?.rotation.y" (input)="obObjectRotation($event, 'y')"></mat-slider>
+  <div>Z Rotation</div>
+  <mat-slider [min]="min" [max]="max" [step]="step" [value]="object?.rotation.z" (input)="obObjectRotation($event, 'z')"></mat-slider>
+</div>

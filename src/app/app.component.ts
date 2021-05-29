@@ -70,16 +70,9 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.light = this.createLight(this.scene, this.camera);
 
     this.scene.registerBeforeRender(() => {
-      // this.light.position = this.camera.position;
     });
-
-    this.setUpBabGui();
 
     this.appService.loadModel(this.models[0]);
-
-    this.scene.debugLayer.show({
-      embedMode: true,
-    });
   }
 
   loadModel(model: ModelDefinition) {
@@ -141,121 +134,15 @@ export class AppComponent implements OnInit, AfterContentInit {
     return light;
   }
 
-  setUpBabGui() {
-    this.babUi = AdvancedDynamicTexture.CreateFullscreenUI("UI");
+  onLightRotationChange(rotation: Vector3) {
+    console.log(rotation);
+    this.mainLight.rotation = rotation;
+  }
 
-    const rotatePanel = new StackPanel();
-    rotatePanel.width = "220px";
-    rotatePanel.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
-    rotatePanel.verticalAlignment = Control.VERTICAL_ALIGNMENT_CENTER;
-    this.babUi.addControl(rotatePanel);
-
-    const yRotateText = new TextBlock();
-    yRotateText.text = "Y-rotation: 0 deg";
-    yRotateText.height = "30px";
-    yRotateText.color = "white";
-    rotatePanel.addControl(yRotateText);
-
-    const yRotateSlider = new Slider();
-    yRotateSlider.minimum = 0;
-    yRotateSlider.maximum = 2 * Math.PI;
-    yRotateSlider.value = 0;
-    yRotateSlider.height = "20px";
-    yRotateSlider.width = "200px";
-    yRotateSlider.onValueChangedObservable.add((value) => {
-      yRotateText.text = "Y-rotation: " + (Tools.ToDegrees(value) | 0) + " deg";
-      if (this.currentModel?.rootMesh) {
-        this.currentModel.rootMesh.rotation.y = value;
-      }
-    });
-    rotatePanel.addControl(yRotateSlider);
-
-    const xRotateText = new TextBlock();
-    xRotateText.text = "X-rotation: 0 deg";
-    xRotateText.height = "30px";
-    xRotateText.color = "white";
-    rotatePanel.addControl(xRotateText);
-
-    const xRotateSlider = new Slider();
-    xRotateSlider.minimum = 0;
-    xRotateSlider.maximum = 2 * Math.PI;
-    xRotateSlider.value = 0;
-    xRotateSlider.height = "20px";
-    xRotateSlider.width = "200px";
-    xRotateSlider.onValueChangedObservable.add((value) => {
-      xRotateText.text = "X-rotation: " + (Tools.ToDegrees(value) | 0) + " deg";
-      if (this.currentModel?.rootMesh) {
-        this.currentModel.rootMesh.rotation.x = value;
-      }
-    });
-    rotatePanel.addControl(xRotateSlider);
-
-    const zRotateText = new TextBlock();
-    zRotateText.text = "Z-rotation: 0 deg";
-    zRotateText.height = "30px";
-    zRotateText.color = "white";
-    rotatePanel.addControl(zRotateText);
-
-    const zRotateSlider = new Slider();
-    zRotateSlider.minimum = 0;
-    zRotateSlider.maximum = 2 * Math.PI;
-    zRotateSlider.value = 0;
-    zRotateSlider.height = "20px";
-    zRotateSlider.width = "200px";
-    zRotateSlider.onValueChangedObservable.add((value) => {
-      zRotateText.text = "Z-rotation: " + (Tools.ToDegrees(value) | 0) + " deg";
-      if (this.currentModel?.rootMesh) {
-        this.currentModel.rootMesh.rotation.z = value;
-      }
-    });
-    rotatePanel.addControl(zRotateSlider);
-
-    const lightingPanel = new StackPanel();
-    lightingPanel.width = "220px";
-    lightingPanel.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
-    lightingPanel.verticalAlignment = Control.VERTICAL_ALIGNMENT_CENTER;
-    this.babUi.addControl(lightingPanel);
-
-    const lightYText = new TextBlock();
-    lightYText.text = "Y-rotation: 0 deg";
-    lightYText.height = "30px";
-    lightYText.color = "white";
-    lightingPanel.addControl(lightYText);
-
-    const lightYSlider = new Slider();
-    lightYSlider.minimum = 0;
-    lightYSlider.maximum = 2 * Math.PI;
-    lightYSlider.value = 0;
-    lightYSlider.height = "20px";
-    lightYSlider.width = "200px";
-    lightYSlider.onValueChangedObservable.add((value) => {
-      lightYText.text = "Y-rotation: " + (Tools.ToDegrees(value) | 0) + " deg";
-      this.mainLight.rotation.y = value;
-    });
-    lightingPanel.addControl(lightYSlider);
-
-    const lightZText = new TextBlock();
-    lightZText.text = "Z-rotation: 0 deg";
-    lightZText.height = "30px";
-    lightZText.color = "white";
-    lightingPanel.addControl(lightZText);
-
-    const lightZSlider = new Slider();
-    lightZSlider.minimum = 0;
-    lightZSlider.maximum = 2 * Math.PI;
-    lightZSlider.value = 0;
-    lightZSlider.height = "20px";
-    lightZSlider.width = "200px";
-    lightZSlider.onValueChangedObservable.add((value) => {
-      zRotateText.text = "Z-rotation: " + (Tools.ToDegrees(value) | 0) + " deg";
-      this.mainLight.rotation.z = value;
-    });
-    lightingPanel.addControl(lightZSlider);
-
-    this.appService.currentModel$.pipe(filter(model => model !== null)).subscribe(model => {
-      yRotateSlider.value = model.rotationCorrection.y;
-      xRotateSlider.value = model.rotationCorrection.x;
-      zRotateSlider.value = model.rotationCorrection.z;
-    })
+  onObjectRotationChange(rotation: Vector3) {
+    console.log(rotation);
+    if (this.currentModel?.rootMesh) {
+      this.currentModel.rootMesh.rotation = rotation;
+    }
   }
 }
