@@ -1,11 +1,11 @@
 import {AfterContentInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {
   ArcRotateCamera,
-  AssetContainer, Camera, Color3,
+  AssetContainer, Camera,
   Engine,
-  HemisphericLight, PointLight,
+  HemisphericLight, Light, PointLight,
   Scene,
-  SceneLoader, Tools, TransformNode,
+  SceneLoader, TransformNode,
   Vector3
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
@@ -16,7 +16,6 @@ import {MODELS} from "./app.constants";
 import {ModelDefinition} from "./app.model";
 import {AppService} from "./app.service";
 import {filter} from "rxjs/operators";
-import {AdvancedDynamicTexture, Control, Slider, StackPanel, TextBlock} from "@babylonjs/gui";
 
 @Component({
   selector: 'app-root',
@@ -31,10 +30,12 @@ export class AppComponent implements OnInit, AfterContentInit {
   private container: AssetContainer;
   currentModel: ModelDefinition;
   private camera: ArcRotateCamera;
-  private light: PointLight;
+  light: Light;
+  ambientLight: Light;
   creditVisible: boolean = true;
-  private babUi: AdvancedDynamicTexture;
-  mainLight: TransformNode;
+  lightTransform: TransformNode;
+  modelTransform: TransformNode;
+  init: boolean = false;
 
   constructor(private appService: AppService) {
   }
@@ -64,10 +65,12 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.engine.displayLoadingUI();
 
     this.scene = new Scene(this.engine);
+    this.lightTransform = new TransformNode("lightTransform", this.scene)
+    this.modelTransform = new TransformNode("modelTransform", this.scene)
 
     this.camera = this.createCamera(this.scene);
     this.camera.attachControl(this.canvas, true);
-    this.light = this.createLight(this.scene, this.camera);
+    this.createLight(this.scene, this.camera);
 
     this.scene.registerBeforeRender(() => {
     });
@@ -86,6 +89,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       container.addAllToScene();
       this.currentModel = model;
       this.currentModel.rootMesh = container.meshes[0];
+      this.currentModel.rootMesh.parent = this.modelTransform;
       this.camera.target = container.meshes[0].position;
 
       // Assume first mesh is root
@@ -95,7 +99,8 @@ export class AppComponent implements OnInit, AfterContentInit {
       }
 
       this.engine.hideLoadingUI();
-    })
+      this.init = true;
+    });
   }
 
   private createCamera(scene: Scene) {
@@ -123,20 +128,17 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   private createLight(scene: Scene, camera: Camera) {
-    const ambient = new HemisphericLight('light', new Vector3(0, 1, 0), scene);
-    ambient.intensity = 0.1;
-    this.mainLight = new TransformNode("lightGroup", scene)
-    const light = new PointLight("pointLight", this.mainLight.position.clone().set(30, 0, 0), scene);
+    this.ambientLight = new HemisphericLight('light', new Vector3(0, 1, 0), scene);
+    this.ambientLight.intensity = 0.1;
+    this.light = new PointLight("pointLight", this.lightTransform.position.clone().set(30, 0, 0), scene);
     // light.diffuse = new Color3(100, 10, 10)
-    light.parent = this.mainLight;
-
-    light.intensity = 1500;
-    return light;
+    this.light.parent = this.lightTransform;
+    this.light.intensity = 1500;
   }
 
   onLightRotationChange(rotation: Vector3) {
     console.log(rotation);
-    this.mainLight.rotation = rotation;
+    this.lightTransform.rotation = rotation;
   }
 
   onObjectRotationChange(rotation: Vector3) {

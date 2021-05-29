@@ -10,3 +10,12 @@ export interface ModelDefinition {
   rotationCorrection: Vector3,
   rootMesh?: AbstractMesh;
 }
+
+export interface LightProps {
+  rotation: Vector3;
+  intensity: number;
+}
+
+export interface ModelProps {
+  rotation: Vector3;
+}

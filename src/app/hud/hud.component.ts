@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {ModelDefinition} from "../app.model";
+import {LightProps, ModelDefinition, ModelProps} from "../app.model";
 import {ModelSelectorComponent} from "../model-selector/model-selector.component";
 import {AppService} from "../app.service";
 import {AbstractMesh, Light, Node, TransformNode, Vector3} from "@babylonjs/core";
@@ -15,15 +15,23 @@ export class HudComponent implements OnInit, OnChanges {
   @Input() models: ModelDefinition[];
   @Input() lightRotation: Vector3;
   @Output() lightRotationChange = new EventEmitter<Vector3>();
+  @Input() lightIntensity: number;
+  @Output() lightIntensityChange = new EventEmitter<number>();
+  @Input() ambientLightIntensity: number;
+  @Output() ambientLightIntensityChange = new EventEmitter<number>();
   @Input() objectRotation: Vector3;
   @Output() objectRotationChange = new EventEmitter<Vector3>();
-  @Input() light: TransformNode;
-  @Input() object: AbstractMesh;
 
-  min: number = 0;
-  max: number = 2 * Math.PI;
-  step: number = 0.01;
-  isVisible: boolean = true;
+
+  minRotation: number = 0;
+  maxRotation: number = 2 * Math.PI;
+  rotationStep: number = 0.01;
+  minIntensity: number = 0;
+  maxIntensity: number = 3000;
+  intensityStep: number = 10;
+  minAmbientIntensity: number = 0;
+  maxAmbientIntensity: number = 1;
+  ambientIntensityStep: number = 0.001;
 
   @ViewChild(ModelSelectorComponent) private modelSelector: ModelSelectorComponent;
 
@@ -37,15 +45,23 @@ export class HudComponent implements OnInit, OnChanges {
     console.log(changes)
   }
 
-  toggleHud() {
-    this.isVisible = !this.isVisible;
+  onLightRotation(event: MatSliderChange, type: "y" | "z") {
+    this.lightRotation[type] = event.value;
+    this.lightIntensityChange.emit(this.lightIntensity);
   }
 
-  onLightRotation(event: MatSliderChange, type: "y" | "z") {
-    this.light.rotation[type] = event.value;
+  onLightIntensityChange(value: number) {
+    this.lightIntensity = value;
+    this.lightIntensityChange.emit(this.lightIntensity);
+  }
+
+  onAmbientLightIntensityChange(value: number) {
+    this.ambientLightIntensity = value;
+    this.ambientLightIntensityChange.emit(this.ambientLightIntensity);
   }
 
   obObjectRotation(event: MatSliderChange, type: "x" | "y" | "z") {
-    this.object.rotation[type] = event.value;
+    this.objectRotation[type] = event.value;
+    this.objectRotationChange.emit(this.objectRotation);
   }
 }
