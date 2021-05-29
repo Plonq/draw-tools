@@ -8,8 +8,8 @@ import {
   SceneLoader, TransformNode,
   Vector3
 } from "@babylonjs/core";
-import "@babylonjs/loaders/glTF";
-import "@babylonjs/core/Debug/debugLayer";
+// import "@babylonjs/loaders/glTF";
+// import "@babylonjs/core/Debug/debugLayer";
 import "@babylonjs/inspector";
 import "pepjs";
 import {MODELS} from "./app.constants";
