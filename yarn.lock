@@ -1202,7 +1202,7 @@
   dependencies:
     "tslib" ">=1.10.0"
 
-"@babylonjs/gui@^4.2.0":
+"@babylonjs/gui@^4.2.0", "@babylonjs/gui@4.2.0":
   "integrity" "sha512-AQnqwFDmQ05FAw4B0BPVUFqWgdSKVI23qVHm/uOOMBQhMo8+WE2pTNATm6Qw/HDVLCp5qUjwIij/3JtG5s0fBw=="
   "resolved" "https://registry.npmjs.org/@babylonjs/gui/-/gui-4.2.0.tgz"
   "version" "4.2.0"
@@ -1210,9 +1210,39 @@
     "@babylonjs/core" "4.2.0"
     "tslib" ">=1.10.0"
 
-"@babylonjs/loaders@^4.2.0":
+"@babylonjs/inspector@^4.2.0":
+  "integrity" "sha512-fT4pKybrZyt2s0Gewu14KZMYer8AUXJ1aasyhZaNSgsNaq+oSoy7D5ljvxZK9Us0BzZerEFzFWOYaL0mwcbpZA=="
+  "resolved" "https://registry.npmjs.org/@babylonjs/inspector/-/inspector-4.2.0.tgz"
+  "version" "4.2.0"
+  dependencies:
+    "@babylonjs/core" "4.2.0"
+    "@babylonjs/gui" "4.2.0"
+    "@babylonjs/loaders" "4.2.0"
+    "@babylonjs/materials" "4.2.0"
+    "@babylonjs/serializers" "4.2.0"
+    "babylonjs-gltf2interface" "4.2.0"
+    "tslib" ">=1.10.0"
+
+"@babylonjs/loaders@^4.2.0", "@babylonjs/loaders@4.2.0":
   "integrity" "sha512-feCmp4I+suBNLko3wGFNZpDg1Bqt9NxEuhKZ+epmaIWSqKEQAMhDvdehcq9vETTVKULkzRGZdDrZmEX0weG80g=="
   "resolved" "https://registry.npmjs.org/@babylonjs/loaders/-/loaders-4.2.0.tgz"
+  "version" "4.2.0"
+  dependencies:
+    "@babylonjs/core" "4.2.0"
+    "babylonjs-gltf2interface" "4.2.0"
+    "tslib" ">=1.10.0"
+
+"@babylonjs/materials@4.2.0":
+  "integrity" "sha512-YoetSvjpilw39W99RyiZLxZy2Zy3baRckDlv/om/0qFmFK7mWsXfoqp5nBecf8bItyuvPgtfJNZwBe669/j2qw=="
+  "resolved" "https://registry.npmjs.org/@babylonjs/materials/-/materials-4.2.0.tgz"
+  "version" "4.2.0"
+  dependencies:
+    "@babylonjs/core" "4.2.0"
+    "tslib" ">=1.10.0"
+
+"@babylonjs/serializers@4.2.0":
+  "integrity" "sha512-VY5SONQaBSMusgNIwNz2k9L+YJK6oeJWLlQUdWvjszXp6/WVELh072S2gpMN0WX7mVonbCdcqXhJrKZgMV6t+g=="
+  "resolved" "https://registry.npmjs.org/@babylonjs/serializers/-/serializers-4.2.0.tgz"
   "version" "4.2.0"
   dependencies:
     "@babylonjs/core" "4.2.0"
@@ -1436,10 +1466,36 @@
   "resolved" "https://registry.npmjs.org/@types/parse-json/-/parse-json-4.0.0.tgz"
   "version" "4.0.0"
 
+"@types/prop-types@*":
+  "integrity" "sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw=="
+  "resolved" "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.3.tgz"
+  "version" "15.7.3"
+
 "@types/q@^0.0.32":
   "integrity" "sha1-vShOV8hPEyXacCur/IKlMoGQwMU="
   "resolved" "https://registry.npmjs.org/@types/q/-/q-0.0.32.tgz"
   "version" "0.0.32"
+
+"@types/react-dom@>=16.0.9":
+  "integrity" "sha512-ikqukEhH4H9gr4iJCmQVNzTB307kROe3XFfHAOTxOXPOw7lAoEXnM5KWTkzeANGL5Ce6ABfiMl/zJBYNi7ObmQ=="
+  "resolved" "https://registry.npmjs.org/@types/react-dom/-/react-dom-17.0.5.tgz"
+  "version" "17.0.5"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@>=16.7.3":
+  "integrity" "sha512-3sx4c0PbXujrYAKwXxNONXUtRp9C+hE2di0IuxFyf5BELD+B+AXL8G7QrmSKhVwKZDbv0igiAjQAMhXj8Yg3aw=="
+  "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.8.tgz"
+  "version" "17.0.8"
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    "csstype" "^3.0.2"
+
+"@types/scheduler@*":
+  "integrity" "sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA=="
+  "resolved" "https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.1.tgz"
+  "version" "0.16.1"
 
 "@types/selenium-webdriver@^3.0.0":
   "integrity" "sha512-tGomyEuzSC1H28y2zlW6XPCaDaXFaD6soTdb4GNdmte2qfHtrKqhy0ZFs4r/1hpazCfEZqeTSRLvSasmEx89uw=="
@@ -2960,6 +3016,11 @@
   "version" "4.2.0"
   dependencies:
     "css-tree" "^1.1.2"
+
+"csstype@^3.0.2":
+  "integrity" "sha512-jXKhWqXPmlUeoQnF/EhTtTl4C9SnrxSH/jZUih3jmO6lBKr99rP3/+FmrMj4EFpOXzMtXHAZkd3x0E6h6Fgflw=="
+  "resolved" "https://registry.npmjs.org/csstype/-/csstype-3.0.8.tgz"
+  "version" "3.0.8"
 
 "custom-event@~1.0.0":
   "integrity" "sha1-XQKkaFCt8bSjF5RqOSj8y1v9BCU="

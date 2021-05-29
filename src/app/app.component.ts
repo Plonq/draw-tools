@@ -1,14 +1,16 @@
 import {AfterContentInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {
   ArcRotateCamera,
-  AssetContainer, Camera,
+  AssetContainer, Camera, Color3,
   Engine,
   HemisphericLight, PointLight,
   Scene,
-  SceneLoader, Tools,
+  SceneLoader, Tools, TransformNode,
   Vector3
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
+import "@babylonjs/core/Debug/debugLayer";
+import "@babylonjs/inspector";
 import "pepjs";
 import {MODELS} from "./app.constants";
 import {ModelDefinition} from "./app.model";
@@ -32,6 +34,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   private light: PointLight;
   creditVisible: boolean = true;
   private babUi: AdvancedDynamicTexture;
+  mainLight: TransformNode;
 
   constructor(private appService: AppService) {
   }
@@ -67,12 +70,16 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.light = this.createLight(this.scene, this.camera);
 
     this.scene.registerBeforeRender(() => {
-      this.light.position = this.camera.position;
+      // this.light.position = this.camera.position;
     });
 
     this.setUpBabGui();
 
     this.appService.loadModel(this.models[0]);
+
+    this.scene.debugLayer.show({
+      embedMode: true,
+    });
   }
 
   loadModel(model: ModelDefinition) {
@@ -124,27 +131,30 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   private createLight(scene: Scene, camera: Camera) {
     const ambient = new HemisphericLight('light', new Vector3(0, 1, 0), scene);
-    ambient.intensity = 0.5;
-    const light = new PointLight("Omni", camera.position, scene);
+    ambient.intensity = 0.1;
+    this.mainLight = new TransformNode("lightGroup", scene)
+    const light = new PointLight("pointLight", this.mainLight.position.clone().set(30, 0, 0), scene);
+    // light.diffuse = new Color3(100, 10, 10)
+    light.parent = this.mainLight;
 
-    light.intensity = 50;
+    light.intensity = 1500;
     return light;
   }
 
   setUpBabGui() {
-   this.babUi = AdvancedDynamicTexture.CreateFullscreenUI("UI");
+    this.babUi = AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
-    const panel = new StackPanel();
-    panel.width = "220px";
-    panel.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
-    panel.verticalAlignment = Control.VERTICAL_ALIGNMENT_CENTER;
-    this.babUi.addControl(panel);
+    const rotatePanel = new StackPanel();
+    rotatePanel.width = "220px";
+    rotatePanel.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
+    rotatePanel.verticalAlignment = Control.VERTICAL_ALIGNMENT_CENTER;
+    this.babUi.addControl(rotatePanel);
 
     const yRotateText = new TextBlock();
     yRotateText.text = "Y-rotation: 0 deg";
     yRotateText.height = "30px";
     yRotateText.color = "white";
-    panel.addControl(yRotateText);
+    rotatePanel.addControl(yRotateText);
 
     const yRotateSlider = new Slider();
     yRotateSlider.minimum = 0;
@@ -153,18 +163,18 @@ export class AppComponent implements OnInit, AfterContentInit {
     yRotateSlider.height = "20px";
     yRotateSlider.width = "200px";
     yRotateSlider.onValueChangedObservable.add((value) => {
-        yRotateText.text = "Y-rotation: " + (Tools.ToDegrees(value) | 0) + " deg";
-        if (this.currentModel?.rootMesh) {
-            this.currentModel.rootMesh.rotation.y = value;
-        }
+      yRotateText.text = "Y-rotation: " + (Tools.ToDegrees(value) | 0) + " deg";
+      if (this.currentModel?.rootMesh) {
+        this.currentModel.rootMesh.rotation.y = value;
+      }
     });
-    panel.addControl(yRotateSlider);
+    rotatePanel.addControl(yRotateSlider);
 
     const xRotateText = new TextBlock();
     xRotateText.text = "X-rotation: 0 deg";
     xRotateText.height = "30px";
     xRotateText.color = "white";
-    panel.addControl(xRotateText);
+    rotatePanel.addControl(xRotateText);
 
     const xRotateSlider = new Slider();
     xRotateSlider.minimum = 0;
@@ -178,13 +188,13 @@ export class AppComponent implements OnInit, AfterContentInit {
         this.currentModel.rootMesh.rotation.x = value;
       }
     });
-    panel.addControl(xRotateSlider);
+    rotatePanel.addControl(xRotateSlider);
 
     const zRotateText = new TextBlock();
     zRotateText.text = "Z-rotation: 0 deg";
     zRotateText.height = "30px";
     zRotateText.color = "white";
-    panel.addControl(zRotateText);
+    rotatePanel.addControl(zRotateText);
 
     const zRotateSlider = new Slider();
     zRotateSlider.minimum = 0;
@@ -198,7 +208,49 @@ export class AppComponent implements OnInit, AfterContentInit {
         this.currentModel.rootMesh.rotation.z = value;
       }
     });
-    panel.addControl(zRotateSlider);
+    rotatePanel.addControl(zRotateSlider);
+
+    const lightingPanel = new StackPanel();
+    lightingPanel.width = "220px";
+    lightingPanel.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
+    lightingPanel.verticalAlignment = Control.VERTICAL_ALIGNMENT_CENTER;
+    this.babUi.addControl(lightingPanel);
+
+    const lightYText = new TextBlock();
+    lightYText.text = "Y-rotation: 0 deg";
+    lightYText.height = "30px";
+    lightYText.color = "white";
+    lightingPanel.addControl(lightYText);
+
+    const lightYSlider = new Slider();
+    lightYSlider.minimum = 0;
+    lightYSlider.maximum = 2 * Math.PI;
+    lightYSlider.value = 0;
+    lightYSlider.height = "20px";
+    lightYSlider.width = "200px";
+    lightYSlider.onValueChangedObservable.add((value) => {
+      lightYText.text = "Y-rotation: " + (Tools.ToDegrees(value) | 0) + " deg";
+      this.mainLight.rotation.y = value;
+    });
+    lightingPanel.addControl(lightYSlider);
+
+    const lightZText = new TextBlock();
+    lightZText.text = "Z-rotation: 0 deg";
+    lightZText.height = "30px";
+    lightZText.color = "white";
+    lightingPanel.addControl(lightZText);
+
+    const lightZSlider = new Slider();
+    lightZSlider.minimum = 0;
+    lightZSlider.maximum = 2 * Math.PI;
+    lightZSlider.value = 0;
+    lightZSlider.height = "20px";
+    lightZSlider.width = "200px";
+    lightZSlider.onValueChangedObservable.add((value) => {
+      zRotateText.text = "Z-rotation: " + (Tools.ToDegrees(value) | 0) + " deg";
+      this.mainLight.rotation.z = value;
+    });
+    lightingPanel.addControl(lightZSlider);
 
     this.appService.currentModel$.pipe(filter(model => model !== null)).subscribe(model => {
       yRotateSlider.value = model.rotationCorrection.y;
