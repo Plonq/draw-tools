@@ -79,6 +79,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   loadModel(model: ModelDefinition) {
+    this.appService.modelLoading$.next(true);
     this.container?.removeAllFromScene();
     return SceneLoader.LoadAssetContainerAsync(
       model.rootUrl,
@@ -100,6 +101,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       }
 
       this.engine.hideLoadingUI();
+      this.appService.modelLoading$.next(false);
       this.init = true;
     });
   }

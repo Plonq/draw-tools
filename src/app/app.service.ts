@@ -6,6 +6,7 @@ import {ModelDefinition} from "./app.model";
 export class AppService {
   private currentModelSubject = new BehaviorSubject<ModelDefinition>(null);
   public currentModel$ = this.currentModelSubject.asObservable();
+  public modelLoading$ = new BehaviorSubject<boolean>(false);
 
   constructor() {
   }

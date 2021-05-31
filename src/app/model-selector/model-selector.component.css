@@ -3,3 +3,17 @@
   padding: 16px;
   overflow-x: auto;
 }
+
+:host.loading {
+  position: relative;
+}
+
+:host.loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: hsla(0, 0%, 0%, 0.5);
+}
