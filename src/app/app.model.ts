@@ -7,6 +7,7 @@ export interface ModelDefinition {
   thumbImg: string;
   credit: string;
   scaleCorrection: number;
+  positionCorrection: Vector3,
   rotationCorrection: Vector3,
   rootMesh?: AbstractMesh;
 }

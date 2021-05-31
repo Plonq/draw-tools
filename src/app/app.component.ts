@@ -88,12 +88,13 @@ export class AppComponent implements OnInit, AfterContentInit {
       this.container = container;
       container.addAllToScene();
       this.currentModel = model;
+      // Assume first mesh is root
       this.currentModel.rootMesh = container.meshes[0];
       this.currentModel.rootMesh.parent = this.modelTransform;
       this.camera.target = container.meshes[0].position;
 
-      // Assume first mesh is root
       this.currentModel.rootMesh.rotation = model.rotationCorrection.clone();
+      this.currentModel.rootMesh.position = model.positionCorrection.clone();
       for (let mesh of container.meshes) {
         mesh.scaling = new Vector3(model.scaleCorrection, model.scaleCorrection, model.scaleCorrection);
       }
