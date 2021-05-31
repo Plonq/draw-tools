@@ -13,7 +13,7 @@ export const MODELS: ModelDefinition[] = [
     rotationCorrection: new Vector3(0, Math.PI / 2, 0),
   },
   {
-    name: "Loomis Head - Planes",
+    name: "Head Planes",
     rootUrl: "/assets/models/loomis-head-planes/",
     sceneFile: "scene.gltf",
     credit: "\"Loomis Head - Planes & essential form\" (https://skfb.ly/6Xprx) by cgmonkey is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).",
