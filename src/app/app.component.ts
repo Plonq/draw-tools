@@ -8,7 +8,6 @@ import {
 import {
   ArcRotateCamera,
   AssetContainer,
-  Camera,
   Engine,
   HemisphericLight,
   Light,
@@ -43,7 +42,6 @@ export class AppComponent implements OnInit, AfterContentInit {
   private camera: ArcRotateCamera;
   light: Light;
   ambientLight: Light;
-  creditVisible: boolean = true;
   lightTransform: TransformNode;
   modelTransform: TransformNode;
   init: boolean = false;
