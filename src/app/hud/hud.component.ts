@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   HostBinding,
+  Inject,
   Input,
   OnChanges,
   OnInit,
@@ -59,7 +60,48 @@ export class HudComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadFromQueryParams();
+  }
+
+  private loadFromQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+
+    setTimeout(() => {
+      this.ambientLightIntensity =
+        Number(params.get("light-a-i")) ?? this.ambientLightIntensity;
+      this.lightIntensity =
+        Number(params.get("light-d-i")) ?? this.lightIntensity;
+      this.lightIntensityChange.emit(this.lightIntensity);
+      this.ambientLightIntensityChange.emit(this.ambientLightIntensity);
+      this.lightRotation.y =
+        Number(params.get("light-d-r-y")) ?? this.lightRotation.y;
+      this.lightRotation.z =
+        Number(params.get("light-d-r-z")) ?? this.lightRotation.z;
+      this.objectRotation.x =
+        Number(params.get("obj-r-x")) ?? this.objectRotation.x;
+      this.objectRotation.y =
+        Number(params.get("obj-r-y")) ?? this.objectRotation.y;
+      this.objectRotation.z =
+        Number(params.get("obj-r-z")) ?? this.objectRotation.z;
+    });
+  }
+
+  private saveToQueryParams() {
+    const params = new URLSearchParams();
+    params.set("light-a-i", this.ambientLightIntensity.toString());
+    params.set("light-d-i", this.lightIntensity.toString());
+    params.set("light-d-r-y", this.lightRotation.y.toString());
+    params.set("light-d-r-z", this.lightRotation.z.toString());
+    params.set("obj-r-x", this.objectRotation.x.toString());
+    params.set("obj-r-y", this.objectRotation.y.toString());
+    params.set("obj-r-z", this.objectRotation.z.toString());
+    window.history.replaceState(null, null, `?${params.toString()}`);
+  }
+
+  private onChanges() {
+    this.saveToQueryParams();
+  }
 
   toggleVisibility() {
     this.hidden = !this.hidden;
@@ -68,24 +110,32 @@ export class HudComponent implements OnInit {
   onLightRotation(event: MatSliderChange, type: "y" | "z") {
     this.lightRotation[type] = -event.value;
     this.lightIntensityChange.emit(this.lightIntensity);
+
+    this.onChanges();
   }
 
   onLightIntensityChange(value: number) {
     this.lightIntensity = value;
     this.lightIntensityChange.emit(this.lightIntensity);
+
+    this.onChanges();
   }
 
   onAmbientLightIntensityChange(value: number) {
     this.ambientLightIntensity = value;
     this.ambientLightIntensityChange.emit(this.ambientLightIntensity);
+
+    this.onChanges();
   }
 
-  obObjectRotation(event: MatSliderChange, type: "x" | "y" | "z") {
+  onObjectRotation(event: MatSliderChange, type: "x" | "y" | "z") {
     let val = event.value;
     if (type === "y" || type === "z") {
       val = -val;
     }
     this.objectRotation[type] = val;
     this.objectRotationChange.emit(this.objectRotation);
+
+    this.onChanges();
   }
 }

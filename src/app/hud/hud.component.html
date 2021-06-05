@@ -62,7 +62,7 @@
     [max]="maxYRotation"
     [step]="rotationStep"
     [value]="-objectRotation.y"
-    (input)="obObjectRotation($event, 'y')"
+    (input)="onObjectRotation($event, 'y')"
   ></mat-slider>
   <div><label for="obj-rotation-pitch">Pitch (z axis)</label></div>
   <mat-slider
@@ -71,7 +71,7 @@
     [max]="maxZRotation"
     [step]="rotationStep"
     [value]="-objectRotation.z"
-    (input)="obObjectRotation($event, 'z')"
+    (input)="onObjectRotation($event, 'z')"
   ></mat-slider>
   <div><label for="obj-rotation-roll">Roll (x axis)</label></div>
   <mat-slider
@@ -80,6 +80,6 @@
     [max]="maxXRotation"
     [step]="rotationStep"
     [value]="objectRotation.x"
-    (input)="obObjectRotation($event, 'x')"
+    (input)="onObjectRotation($event, 'x')"
   ></mat-slider>
 </div>
