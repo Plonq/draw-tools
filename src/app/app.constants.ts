@@ -3,6 +3,7 @@ import { Vector3 } from "@babylonjs/core";
 
 export const MODELS: ModelDefinition[] = [
   {
+    id: "loomis-head",
     name: "Loomis Head",
     rootUrl: "/assets/models/loomis-head/",
     sceneFile: "scene.gltf",
@@ -14,6 +15,7 @@ export const MODELS: ModelDefinition[] = [
     rotationCorrection: new Vector3(0, Math.PI / 2, 0),
   },
   {
+    id: "head-planes",
     name: "Head Planes",
     rootUrl: "/assets/models/loomis-head-planes/",
     sceneFile: "scene.gltf",
@@ -25,6 +27,7 @@ export const MODELS: ModelDefinition[] = [
     rotationCorrection: Vector3.Zero(),
   },
   {
+    id: "human-skull",
     name: "Human Skull",
     rootUrl: "/assets/models/human-skull/",
     sceneFile: "scene.gltf",

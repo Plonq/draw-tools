@@ -1,6 +1,7 @@
 import { AbstractMesh, Vector3 } from "@babylonjs/core";
 
 export interface ModelDefinition {
+  id: string;
   name: string;
   rootUrl: string;
   sceneFile: string;

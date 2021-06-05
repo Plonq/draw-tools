@@ -25,6 +25,7 @@ import { MODELS } from "./app.constants";
 import { ModelDefinition } from "./app.model";
 import { AppService } from "./app.service";
 import { filter } from "rxjs/operators";
+import { getQueryParam, setQueryParam } from "./utils";
 
 @Component({
   selector: "app-root",
@@ -84,7 +85,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
     this.scene.registerBeforeRender(() => {});
 
-    this.appService.loadModel(this.models[0]);
+    this.appService.loadModel(this.getModelToLoad());
   }
 
   loadModel(model: ModelDefinition) {
@@ -116,6 +117,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       this.engine.hideLoadingUI();
       this.appService.modelLoading$.next(false);
       this.init = true;
+      this.saveCurrentModel();
     });
   }
 
@@ -158,5 +160,23 @@ export class AppComponent implements OnInit, AfterContentInit {
     // light.diffuse = new Color3(100, 10, 10)
     this.light.parent = this.lightTransform;
     this.light.intensity = 1500;
+  }
+
+  private getModelToLoad() {
+    let modelToLoad: ModelDefinition = this.models[0]; // Default to first model
+    const savedModelId = getQueryParam("model", null);
+
+    if (savedModelId) {
+      const model = this.models.find((model) => model.id === savedModelId);
+      if (model) {
+        modelToLoad = model;
+      }
+    }
+
+    return modelToLoad;
+  }
+
+  private saveCurrentModel() {
+    setQueryParam("model", this.currentModel.id);
   }
 }

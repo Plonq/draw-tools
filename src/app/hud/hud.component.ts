@@ -21,6 +21,7 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import { MatSliderChange } from "@angular/material/slider";
+import { getQueryParam } from "../utils";
 
 @Component({
   selector: "hud",
@@ -82,17 +83,13 @@ export class HudComponent implements OnInit {
   }
 
   private loadFromQueryParams() {
-    const params = new URLSearchParams(window.location.search);
-
     setTimeout(() => {
       // Single values - need change emitted
-      this.ambientLightIntensity = this.getParamVal(
-        params,
+      this.ambientLightIntensity = getQueryParam(
         "light-a-i",
         this.ambientLightIntensity
       );
-      this.directionalLightIntensity = this.getParamVal(
-        params,
+      this.directionalLightIntensity = getQueryParam(
         "light-d-i",
         this.directionalLightIntensity
       );
@@ -100,31 +97,17 @@ export class HudComponent implements OnInit {
       this.ambientLightIntensityChange.emit(this.ambientLightIntensity);
 
       // Objects - don't need changed emitted
-      this.directionalLightRotation.y = this.getParamVal(
-        params,
+      this.directionalLightRotation.y = getQueryParam(
         "light-d-r-y",
         this.directionalLightRotation.y
       );
-      this.directionalLightRotation.z = this.getParamVal(
-        params,
+      this.directionalLightRotation.z = getQueryParam(
         "light-d-r-z",
         this.directionalLightRotation.z
       );
-      this.objectRotation.x = this.getParamVal(
-        params,
-        "obj-r-x",
-        this.objectRotation.x
-      );
-      this.objectRotation.y = this.getParamVal(
-        params,
-        "obj-r-y",
-        this.objectRotation.y
-      );
-      this.objectRotation.z = this.getParamVal(
-        params,
-        "obj-r-z",
-        this.objectRotation.z
-      );
+      this.objectRotation.x = getQueryParam("obj-r-x", this.objectRotation.x);
+      this.objectRotation.y = getQueryParam("obj-r-y", this.objectRotation.y);
+      this.objectRotation.z = getQueryParam("obj-r-z", this.objectRotation.z);
     });
   }
 
@@ -195,15 +178,5 @@ export class HudComponent implements OnInit {
     );
 
     this.onChanges();
-  }
-
-  private getParamVal(params: URLSearchParams, key: string, fallback?: any) {
-    if (params.has(key)) {
-      return params.get(key);
-    }
-    if (fallback !== undefined) {
-      return fallback;
-    }
-    throw new Error(`Key error: key '${key}' does not exist in params`);
   }
 }
