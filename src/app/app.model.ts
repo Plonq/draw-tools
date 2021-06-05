@@ -1,4 +1,4 @@
-import {AbstractMesh, Vector3} from "@babylonjs/core";
+import { AbstractMesh, Vector3 } from "@babylonjs/core";
 
 export interface ModelDefinition {
   name: string;
@@ -7,8 +7,8 @@ export interface ModelDefinition {
   thumbImg: string;
   credit: string;
   scaleCorrection: number;
-  positionCorrection: Vector3,
-  rotationCorrection: Vector3,
+  positionCorrection: Vector3;
+  rotationCorrection: Vector3;
   rootMesh?: AbstractMesh;
 }
 

@@ -1,3 +1,7 @@
-<button model-selector-item *ngFor="let model of models" [model]="model" [class.active]="(appService.currentModel$ | async) === model"
-        (click)="selectModel(model)">
-</button>
+<button
+  model-selector-item
+  *ngFor="let model of models"
+  [model]="model"
+  [class.active]="(appService.currentModel$ | async) === model"
+  (click)="selectModel(model)"
+></button>

@@ -1,16 +1,30 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {LightProps, ModelDefinition, ModelProps} from "../app.model";
-import {ModelSelectorComponent} from "../model-selector/model-selector.component";
-import {AppService} from "../app.service";
-import {AbstractMesh, Light, Node, TransformNode, Vector3} from "@babylonjs/core";
-import {MatSliderChange} from "@angular/material/slider";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from "@angular/core";
+import { LightProps, ModelDefinition, ModelProps } from "../app.model";
+import { ModelSelectorComponent } from "../model-selector/model-selector.component";
+import { AppService } from "../app.service";
+import {
+  AbstractMesh,
+  Light,
+  Node,
+  TransformNode,
+  Vector3,
+} from "@babylonjs/core";
+import { MatSliderChange } from "@angular/material/slider";
 
 @Component({
-  selector: 'hud',
-  templateUrl: 'hud.component.html',
-  styleUrls: ['hud.component.css']
+  selector: "hud",
+  templateUrl: "hud.component.html",
+  styleUrls: ["hud.component.css"],
 })
-
 export class HudComponent implements OnInit, OnChanges {
   @Input() models: ModelDefinition[];
   @Input() lightRotation: Vector3;
@@ -21,7 +35,6 @@ export class HudComponent implements OnInit, OnChanges {
   @Output() ambientLightIntensityChange = new EventEmitter<number>();
   @Input() objectRotation: Vector3;
   @Output() objectRotationChange = new EventEmitter<Vector3>();
-
 
   minXRotation: number = -Math.PI;
   maxXRotation: number = Math.PI;
@@ -37,16 +50,15 @@ export class HudComponent implements OnInit, OnChanges {
   maxAmbientIntensity: number = 1;
   ambientIntensityStep: number = 0.001;
 
-  @ViewChild(ModelSelectorComponent) private modelSelector: ModelSelectorComponent;
+  @ViewChild(ModelSelectorComponent)
+  private modelSelector: ModelSelectorComponent;
 
-  constructor(public appService: AppService) {
-  }
+  constructor(public appService: AppService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes)
+    console.log(changes);
   }
 
   onLightRotation(event: MatSliderChange, type: "y" | "z") {

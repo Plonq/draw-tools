@@ -1,6 +1,15 @@
-<button class="collapse" (click)="toggleGui()">{{guiVisible ? '▼' : '▲'}}</button>
+<button class="collapse" (click)="toggleGui()">
+  {{ guiVisible ? "▼" : "▲" }}
+</button>
 <div class="collapsible" [class.collapsed]="!guiVisible">
-  <div class="credit">{{(appService.currentModel$ | async)?.credit}}</div>
-  <mat-progress-bar class="loader" mode="indeterminate" *ngIf="appService.modelLoading$ | async"></mat-progress-bar>
-  <model-selector [models]="models" [loading]="appService.modelLoading$ | async"></model-selector>
+  <div class="credit">{{ (appService.currentModel$ | async)?.credit }}</div>
+  <mat-progress-bar
+    class="loader"
+    mode="indeterminate"
+    *ngIf="appService.modelLoading$ | async"
+  ></mat-progress-bar>
+  <model-selector
+    [models]="models"
+    [loading]="appService.modelLoading$ | async"
+  ></model-selector>
 </div>

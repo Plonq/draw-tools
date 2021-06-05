@@ -1,3 +1,9 @@
 <canvas #canvas></canvas>
-<hud *ngIf="init" [lightRotation]="lightTransform.rotation" [(lightIntensity)]="light.intensity" [(ambientLightIntensity)]="ambientLight.intensity" [objectRotation]="modelTransform.rotation"></hud>
+<hud
+  *ngIf="init"
+  [lightRotation]="lightTransform.rotation"
+  [(lightIntensity)]="light.intensity"
+  [(ambientLightIntensity)]="ambientLight.intensity"
+  [objectRotation]="modelTransform.rotation"
+></hud>
 <gui [models]="models"></gui>

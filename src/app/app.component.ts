@@ -1,30 +1,41 @@
-import {AfterContentInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import {
   ArcRotateCamera,
-  AssetContainer, Camera,
+  AssetContainer,
+  Camera,
   Engine,
-  HemisphericLight, Light, PointLight,
+  HemisphericLight,
+  Light,
+  PointLight,
   Scene,
-  SceneLoader, TransformNode,
-  Vector3
+  SceneLoader,
+  TransformNode,
+  Vector3,
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 // import "@babylonjs/core/Debug/debugLayer";
 // import "@babylonjs/inspector";
 import "pepjs";
-import {MODELS} from "./app.constants";
-import {ModelDefinition} from "./app.model";
-import {AppService} from "./app.service";
-import {filter} from "rxjs/operators";
+import { MODELS } from "./app.constants";
+import { ModelDefinition } from "./app.model";
+import { AppService } from "./app.service";
+import { filter } from "rxjs/operators";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit, AfterContentInit {
   private engine: Engine;
-  @ViewChild("canvas", {static: true}) private canvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild("canvas", { static: true })
+  private canvas: ElementRef<HTMLCanvasElement>;
   private scene: Scene;
   readonly models: ModelDefinition[] = MODELS;
   private container: AssetContainer;
@@ -37,11 +48,12 @@ export class AppComponent implements OnInit, AfterContentInit {
   modelTransform: TransformNode;
   init: boolean = false;
 
-  constructor(private appService: AppService) {
-  }
+  constructor(private appService: AppService) {}
 
   ngOnInit() {
-    this.appService.currentModel$.pipe(filter(model => model !== null)).subscribe(model => this.loadModel(model))
+    this.appService.currentModel$
+      .pipe(filter((model) => model !== null))
+      .subscribe((model) => this.loadModel(model));
   }
 
   ngAfterContentInit() {
@@ -50,7 +62,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       stencil: true,
     });
 
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       this.engine.resize();
     });
 
@@ -65,15 +77,14 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.engine.displayLoadingUI();
 
     this.scene = new Scene(this.engine);
-    this.lightTransform = new TransformNode("lightTransform", this.scene)
-    this.modelTransform = new TransformNode("modelTransform", this.scene)
+    this.lightTransform = new TransformNode("lightTransform", this.scene);
+    this.modelTransform = new TransformNode("modelTransform", this.scene);
 
     this.camera = this.createCamera(this.scene);
     this.camera.attachControl(this.canvas, true);
     this.createLight(this.scene, this.camera);
 
-    this.scene.registerBeforeRender(() => {
-    });
+    this.scene.registerBeforeRender(() => {});
 
     this.appService.loadModel(this.models[0]);
   }
@@ -85,7 +96,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       model.rootUrl,
       model.sceneFile,
       this.scene
-    ).then(container => {
+    ).then((container) => {
       this.container = container;
       container.addAllToScene();
       this.currentModel = model;
@@ -97,7 +108,11 @@ export class AppComponent implements OnInit, AfterContentInit {
       this.currentModel.rootMesh.rotation = model.rotationCorrection.clone();
       this.currentModel.rootMesh.position = model.positionCorrection.clone();
       for (let mesh of container.meshes) {
-        mesh.scaling = new Vector3(model.scaleCorrection, model.scaleCorrection, model.scaleCorrection);
+        mesh.scaling = new Vector3(
+          model.scaleCorrection,
+          model.scaleCorrection,
+          model.scaleCorrection
+        );
       }
 
       this.engine.hideLoadingUI();
@@ -111,7 +126,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     const beta = Math.PI / 2;
 
     const camera = new ArcRotateCamera(
-      'camera',
+      "camera",
       alpha,
       beta,
       30,
@@ -131,9 +146,17 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   private createLight(scene: Scene, camera: Camera) {
-    this.ambientLight = new HemisphericLight('light', new Vector3(0, 1, 0), scene);
+    this.ambientLight = new HemisphericLight(
+      "light",
+      new Vector3(0, 1, 0),
+      scene
+    );
     this.ambientLight.intensity = 0.1;
-    this.light = new PointLight("pointLight", this.lightTransform.position.clone().set(30, 0, 0), scene);
+    this.light = new PointLight(
+      "pointLight",
+      this.lightTransform.position.clone().set(30, 0, 0),
+      scene
+    );
     // light.diffuse = new Color3(100, 10, 10)
     this.light.parent = this.lightTransform;
     this.light.intensity = 1500;

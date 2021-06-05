@@ -1,20 +1,71 @@
+<div class="panel toggle">
+  <button
+    mat-icon-button
+    color="accent"
+    aria-label="Example icon button with a menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+</div>
 <div class="panel lights">
   <h2>Light Controls</h2>
   <div>Y Rotation</div>
-  <mat-slider [min]="minYRotation" [max]="maxYRotation" [step]="rotationStep" [value]="-lightRotation.y" (input)="onLightRotation($event, 'y')"></mat-slider>
+  <mat-slider
+    [min]="minYRotation"
+    [max]="maxYRotation"
+    [step]="rotationStep"
+    [value]="-lightRotation.y"
+    (input)="onLightRotation($event, 'y')"
+  ></mat-slider>
   <div>Z Rotation</div>
-  <mat-slider [min]="minZRotation" [max]="maxZRotation" [step]="rotationStep" [value]="-lightRotation.z" (input)="onLightRotation($event, 'z')"></mat-slider>
+  <mat-slider
+    [min]="minZRotation"
+    [max]="maxZRotation"
+    [step]="rotationStep"
+    [value]="-lightRotation.z"
+    (input)="onLightRotation($event, 'z')"
+  ></mat-slider>
   <div>Directional Intensity</div>
-  <mat-slider [min]="minIntensity" [max]="maxIntensity" [step]="intensityStep" [value]="lightIntensity" (input)="onLightIntensityChange($event.value)"></mat-slider>
+  <mat-slider
+    [min]="minIntensity"
+    [max]="maxIntensity"
+    [step]="intensityStep"
+    [value]="lightIntensity"
+    (input)="onLightIntensityChange($event.value)"
+  ></mat-slider>
   <div>Ambient Intensity</div>
-  <mat-slider [min]="minAmbientIntensity" [max]="maxAmbientIntensity" [step]="ambientIntensityStep" [value]="ambientLightIntensity" (input)="onAmbientLightIntensityChange($event.value)"></mat-slider>
+  <mat-slider
+    [min]="minAmbientIntensity"
+    [max]="maxAmbientIntensity"
+    [step]="ambientIntensityStep"
+    [value]="ambientLightIntensity"
+    (input)="onAmbientLightIntensityChange($event.value)"
+  ></mat-slider>
 </div>
 <div class="panel object">
   <h2>Object Controls</h2>
   <div>X Rotation</div>
-  <mat-slider [min]="minXRotation" [max]="maxXRotation" [step]="rotationStep" [value]="objectRotation.x" (input)="obObjectRotation($event, 'x')"></mat-slider>
+  <mat-slider
+    [min]="minXRotation"
+    [max]="maxXRotation"
+    [step]="rotationStep"
+    [value]="objectRotation.x"
+    (input)="obObjectRotation($event, 'x')"
+  ></mat-slider>
   <div>Y Rotation</div>
-  <mat-slider [min]="minYRotation" [max]="maxYRotation" [step]="rotationStep" [value]="-objectRotation.y" (input)="obObjectRotation($event, 'y')"></mat-slider>
+  <mat-slider
+    [min]="minYRotation"
+    [max]="maxYRotation"
+    [step]="rotationStep"
+    [value]="-objectRotation.y"
+    (input)="obObjectRotation($event, 'y')"
+  ></mat-slider>
   <div>Z Rotation</div>
-  <mat-slider [min]="minZRotation" [max]="maxZRotation" [step]="rotationStep" [value]="-objectRotation.z" (input)="obObjectRotation($event, 'z')"></mat-slider>
+  <mat-slider
+    [min]="minZRotation"
+    [max]="maxZRotation"
+    [step]="rotationStep"
+    [value]="-objectRotation.z"
+    (input)="obObjectRotation($event, 'z')"
+  ></mat-slider>
 </div>
