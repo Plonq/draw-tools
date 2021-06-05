@@ -7,10 +7,10 @@
   flex-basis: 150px;
   background-size: cover;
   cursor: pointer;
-}
 
-:host.active {
-  box-shadow: 0 0 0 2px white;
+  &.active {
+    box-shadow: 0 0 0 2px white;
+  }
 }
 
 span {

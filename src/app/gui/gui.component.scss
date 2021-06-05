@@ -17,19 +17,13 @@
 
 .collapsible {
   max-height: 500px;
-  /*transition: all 0.5s ease;*/
 }
 
 .collapsed {
-  /*transform: translateY(100%);*/
   max-height: 0;
 }
 
 .credit {
-  /*position: fixed;*/
-  /*top: 0;*/
-  /*right: 0;*/
-  /*left: 0;*/
   color: hsl(0, 0%, 70%);
   padding: 4px;
   font-size: 14px;

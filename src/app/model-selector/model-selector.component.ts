@@ -5,7 +5,7 @@ import { AppService } from "../app.service";
 @Component({
   selector: "model-selector",
   templateUrl: "model-selector.component.html",
-  styleUrls: ["model-selector.component.css"],
+  styleUrls: ["model-selector.component.scss"],
   host: {
     "[class.loading]": "loading",
   },

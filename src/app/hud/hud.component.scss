@@ -14,10 +14,10 @@
     "lights . . . object"
     ". . . . ."
     ". . . . .";
-}
 
-:host.hide-controls .toggleable {
-  display: none;
+  &.hide-controls .toggleable {
+    display: none;
+  }
 }
 
 .panel {

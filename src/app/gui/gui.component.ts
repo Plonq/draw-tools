@@ -6,7 +6,7 @@ import { AppService } from "../app.service";
 @Component({
   selector: "gui",
   templateUrl: "gui.component.html",
-  styleUrls: ["gui.component.css"],
+  styleUrls: ["gui.component.scss"],
 })
 export class GuiComponent implements OnInit {
   @Input() models: ModelDefinition[];

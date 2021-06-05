@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+  padding: 16px;
+  overflow-x: auto;
+
+  &::after {
+    content: "";
+    min-width: 16px;
+  }
+
+  &.loading {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: hsla(0, 0%, 0%, 0.5);
+    }
+  }
+}
+
+.model-button {
+  flex-shrink: 0;
+
+  &:not(:last-child) {
+    margin-right: 16px;
+  }
+}

@@ -25,7 +25,7 @@ import { MatSliderChange } from "@angular/material/slider";
 @Component({
   selector: "hud",
   templateUrl: "hud.component.html",
-  styleUrls: ["hud.component.css"],
+  styleUrls: ["hud.component.scss"],
 })
 export class HudComponent implements OnInit {
   @Input() models: ModelDefinition[];

@@ -4,7 +4,7 @@ import { ModelDefinition } from "../app.model";
 @Component({
   selector: "[model-selector-item]",
   templateUrl: "model-selector-item.component.html",
-  styleUrls: ["model-selector-item.component.css"],
+  styleUrls: ["model-selector-item.component.scss"],
   host: {
     "[style.background-image]": "backgroundImg",
   },
