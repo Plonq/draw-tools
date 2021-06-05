@@ -4,6 +4,11 @@
   overflow-x: auto;
 }
 
+:host:after {
+  content: "";
+  min-width: 16px;
+}
+
 :host.loading {
   position: relative;
 }
@@ -16,4 +21,12 @@
   right: 0;
   bottom: 0;
   background-color: hsla(0, 0%, 0%, 0.5);
+}
+
+.model-button {
+  flex-shrink: 0;
+}
+
+.model-button:not(:last-child) {
+  margin-right: 16px;
 }
