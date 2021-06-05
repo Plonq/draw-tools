@@ -3,6 +3,7 @@
   model-selector-item
   *ngFor="let model of models"
   [model]="model"
+  [disabled]="loading"
   [class.active]="(appService.currentModel$ | async) === model"
   (click)="selectModel(model)"
 ></button>

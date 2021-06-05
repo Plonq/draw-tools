@@ -6,9 +6,6 @@ import { AppService } from "../app.service";
   selector: "model-selector",
   templateUrl: "model-selector.component.html",
   styleUrls: ["model-selector.component.scss"],
-  host: {
-    "[class.loading]": "loading",
-  },
 })
 export class ModelSelectorComponent implements OnInit {
   @Input() models: ModelDefinition[];
