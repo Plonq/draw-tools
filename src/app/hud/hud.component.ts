@@ -2,26 +2,18 @@ import {
   Component,
   EventEmitter,
   HostBinding,
-  Inject,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
   ViewChild,
 } from "@angular/core";
-import { LightProps, ModelDefinition, ModelProps } from "../app.model";
+import { ModelDefinition } from "../app.model";
 import { ModelSelectorComponent } from "../model-selector/model-selector.component";
-import { AppService } from "../app.service";
-import {
-  AbstractMesh,
-  Light,
-  Node,
-  TransformNode,
-  Vector3,
-} from "@babylonjs/core";
+import { Vector3 } from "@babylonjs/core";
 import { MatSliderChange } from "@angular/material/slider";
 import { getQueryParam } from "../utils";
+import { Clipboard } from "@angular/cdk/clipboard";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "hud",
@@ -66,7 +58,7 @@ export class HudComponent implements OnInit {
   @ViewChild(ModelSelectorComponent)
   private modelSelector: ModelSelectorComponent;
 
-  constructor() {}
+  constructor(private clipboard: Clipboard, private snackbar: MatSnackBar) {}
 
   ngOnInit() {
     this.initDefaults();
@@ -178,5 +170,10 @@ export class HudComponent implements OnInit {
     );
 
     this.onChanges();
+  }
+
+  share() {
+    this.clipboard.copy(window.location.href);
+    this.snackbar.open("Link copied to clipboard!", null, { duration: 3000 });
   }
 }

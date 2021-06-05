@@ -6,6 +6,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatMenuModule } from "@angular/material/menu";
+import { ClipboardModule } from "@angular/cdk/clipboard";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 const materialModules = [
   MatSliderModule,
@@ -15,6 +17,8 @@ const materialModules = [
   MatButtonModule,
   MatTooltipModule,
   MatMenuModule,
+  ClipboardModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({
