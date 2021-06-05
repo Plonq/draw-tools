@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
     this.camera = this.createCamera(this.scene);
     this.camera.attachControl(this.canvas, true);
-    this.createLight(this.scene, this.camera);
+    this.createLight(this.scene);
 
     this.scene.registerBeforeRender(() => {});
 
@@ -145,7 +145,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     return camera;
   }
 
-  private createLight(scene: Scene, camera: Camera) {
+  private createLight(scene: Scene) {
     this.ambientLight = new HemisphericLight(
       "light",
       new Vector3(0, 1, 0),

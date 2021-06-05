@@ -55,11 +55,11 @@ export class HudComponent implements OnInit {
   maxAmbientLightIntensity: number = 1;
   ambientLightIntensityStep: number = 0.001;
 
-  private defaults = {
-    directionalLightIntensity: 1500,
-    ambientLightIntensity: 0.1,
-    directionalLightRotation: Vector3.Zero(),
-    objectRotation: Vector3.Zero(),
+  private defaults: {
+    directionalLightIntensity: number;
+    ambientLightIntensity: number;
+    directionalLightRotation: Vector3;
+    objectRotation: Vector3;
   };
 
   @ViewChild(ModelSelectorComponent)
@@ -73,7 +73,6 @@ export class HudComponent implements OnInit {
   }
 
   private initDefaults() {
-    // Sets defaults to passed in values
     this.defaults = {
       directionalLightIntensity: this.directionalLightIntensity,
       ambientLightIntensity: this.ambientLightIntensity,
