@@ -68,22 +68,46 @@ export class HudComponent implements OnInit {
     const params = new URLSearchParams(window.location.search);
 
     setTimeout(() => {
-      this.ambientLightIntensity =
-        Number(params.get("light-a-i")) ?? this.ambientLightIntensity;
-      this.lightIntensity =
-        Number(params.get("light-d-i")) ?? this.lightIntensity;
+      // Single values - need change emitted
+      this.ambientLightIntensity = this.getParamVal(
+        params,
+        "light-a-i",
+        this.ambientLightIntensity
+      );
+      this.lightIntensity = this.getParamVal(
+        params,
+        "light-d-i",
+        this.lightIntensity
+      );
       this.lightIntensityChange.emit(this.lightIntensity);
       this.ambientLightIntensityChange.emit(this.ambientLightIntensity);
-      this.lightRotation.y =
-        Number(params.get("light-d-r-y")) ?? this.lightRotation.y;
-      this.lightRotation.z =
-        Number(params.get("light-d-r-z")) ?? this.lightRotation.z;
-      this.objectRotation.x =
-        Number(params.get("obj-r-x")) ?? this.objectRotation.x;
-      this.objectRotation.y =
-        Number(params.get("obj-r-y")) ?? this.objectRotation.y;
-      this.objectRotation.z =
-        Number(params.get("obj-r-z")) ?? this.objectRotation.z;
+
+      // Objects - don't need changed emitted
+      this.lightRotation.y = this.getParamVal(
+        params,
+        "light-d-r-y",
+        this.lightRotation.y
+      );
+      this.lightRotation.z = this.getParamVal(
+        params,
+        "light-d-r-z",
+        this.lightRotation.z
+      );
+      this.objectRotation.x = this.getParamVal(
+        params,
+        "obj-r-x",
+        this.objectRotation.x
+      );
+      this.objectRotation.y = this.getParamVal(
+        params,
+        "obj-r-y",
+        this.objectRotation.y
+      );
+      this.objectRotation.z = this.getParamVal(
+        params,
+        "obj-r-z",
+        this.objectRotation.z
+      );
     });
   }
 
@@ -137,5 +161,15 @@ export class HudComponent implements OnInit {
     this.objectRotationChange.emit(this.objectRotation);
 
     this.onChanges();
+  }
+
+  private getParamVal(params: URLSearchParams, key: string, fallback?: any) {
+    if (params.has(key)) {
+      return params.get(key);
+    }
+    if (fallback !== undefined) {
+      return fallback;
+    }
+    throw new Error(`Key error: key '${key}' does not exist in params`);
   }
 }
