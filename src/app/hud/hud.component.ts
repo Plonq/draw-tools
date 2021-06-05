@@ -23,8 +23,12 @@ export class HudComponent implements OnInit, OnChanges {
   @Output() objectRotationChange = new EventEmitter<Vector3>();
 
 
-  minRotation: number = 0;
-  maxRotation: number = 2 * Math.PI;
+  minXRotation: number = -Math.PI;
+  maxXRotation: number = Math.PI;
+  minYRotation: number = -Math.PI;
+  maxYRotation: number = Math.PI;
+  minZRotation: number = -Math.PI;
+  maxZRotation: number = Math.PI;
   rotationStep: number = 0.01;
   minIntensity: number = 0;
   maxIntensity: number = 3000;
@@ -46,7 +50,7 @@ export class HudComponent implements OnInit, OnChanges {
   }
 
   onLightRotation(event: MatSliderChange, type: "y" | "z") {
-    this.lightRotation[type] = event.value;
+    this.lightRotation[type] = -event.value;
     this.lightIntensityChange.emit(this.lightIntensity);
   }
 
@@ -61,7 +65,11 @@ export class HudComponent implements OnInit, OnChanges {
   }
 
   obObjectRotation(event: MatSliderChange, type: "x" | "y" | "z") {
-    this.objectRotation[type] = event.value;
+    let val = event.value;
+    if (type === "y" || type === "z") {
+      val = -val;
+    }
+    this.objectRotation[type] = val;
     this.objectRotationChange.emit(this.objectRotation);
   }
 }
