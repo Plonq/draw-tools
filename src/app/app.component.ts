@@ -78,7 +78,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.main();
   }
 
-  private async main() {
+  private main() {
     this.engine.displayLoadingUI();
 
     this.scene = new Scene(this.engine);
