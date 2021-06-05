@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  HostBinding,
   Input,
   OnChanges,
   OnInit,
@@ -36,6 +37,9 @@ export class HudComponent implements OnInit, OnChanges {
   @Input() objectRotation: Vector3;
   @Output() objectRotationChange = new EventEmitter<Vector3>();
 
+  @HostBinding("class.hide-controls")
+  hidden: boolean = false;
+
   minXRotation: number = -Math.PI;
   maxXRotation: number = Math.PI;
   minYRotation: number = -Math.PI;
@@ -59,6 +63,10 @@ export class HudComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
+  }
+
+  toggleVisibility() {
+    this.hidden = !this.hidden;
   }
 
   onLightRotation(event: MatSliderChange, type: "y" | "z") {

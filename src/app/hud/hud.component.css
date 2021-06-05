@@ -9,15 +9,24 @@
   color: white;
   pointer-events: none;
   grid-template-areas:
-    ". . . . ."
+    ". . . . toggle"
     ". . . . ."
     "lights . . . object"
     ". . . . ."
     ". . . . .";
 }
 
+:host.hide-controls .toggleable {
+  display: none;
+}
+
 .panel {
   pointer-events: initial;
+}
+
+.toggle {
+  grid-area: toggle;
+  text-align: right;
 }
 
 .lights {

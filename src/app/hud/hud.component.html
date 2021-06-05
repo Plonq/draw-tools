@@ -2,12 +2,14 @@
   <button
     mat-icon-button
     color="accent"
-    aria-label="Example icon button with a menu icon"
+    aria-label="Toggle visibility of controls"
+    [matTooltip]="hidden ? 'Show controls' : 'Hide controls'"
+    (click)="toggleVisibility()"
   >
-    <mat-icon>menu</mat-icon>
+    <mat-icon>{{ hidden ? "visibility_off" : "visibility" }}</mat-icon>
   </button>
 </div>
-<div class="panel lights">
+<div class="panel lights toggleable">
   <h2>Light Controls</h2>
   <div>Y Rotation</div>
   <mat-slider
@@ -42,7 +44,7 @@
     (input)="onAmbientLightIntensityChange($event.value)"
   ></mat-slider>
 </div>
-<div class="panel object">
+<div class="panel object toggleable">
   <h2>Object Controls</h2>
   <div>X Rotation</div>
   <mat-slider
