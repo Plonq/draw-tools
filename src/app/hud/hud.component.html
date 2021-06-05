@@ -8,6 +8,21 @@
   >
     <mat-icon>{{ hidden ? "visibility_off" : "visibility" }}</mat-icon>
   </button>
+  <button
+    mat-icon-button
+    color="accent"
+    aria-label="Options"
+    matTooltip="Options"
+    [matMenuTriggerFor]="optionsMenu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #optionsMenu>
+    <button mat-menu-item (click)="reset()">
+      <mat-icon>restart_alt</mat-icon>
+      <span>Reset to default</span>
+    </button>
+  </mat-menu>
 </div>
 <div class="panel lights toggleable">
   <h2>Light Controls</h2>
@@ -18,7 +33,7 @@
     [min]="minYRotation"
     [max]="maxYRotation"
     [step]="rotationStep"
-    [value]="-lightRotation.y"
+    [value]="-directionalLightRotation.y"
     (input)="onLightRotation($event, 'y')"
   ></mat-slider>
   <div><label for="light-rotation-z">Z axis rotation</label></div>
@@ -27,7 +42,7 @@
     [min]="minZRotation"
     [max]="maxZRotation"
     [step]="rotationStep"
-    [value]="-lightRotation.z"
+    [value]="-directionalLightRotation.z"
     (input)="onLightRotation($event, 'z')"
   ></mat-slider>
   <div>
@@ -35,19 +50,19 @@
   </div>
   <mat-slider
     id="direction-intensity-slider"
-    [min]="minIntensity"
-    [max]="maxIntensity"
-    [step]="intensityStep"
-    [value]="lightIntensity"
+    [min]="minDirectionalLightIntensity"
+    [max]="maxDirectionalLightIntensity"
+    [step]="directionalLightIntensityStep"
+    [value]="directionalLightIntensity"
     (input)="onLightIntensityChange($event.value)"
   ></mat-slider>
   <h3>Ambient Light</h3>
   <div><label for="ambient-intensity-slider">Intensity</label></div>
   <mat-slider
     id="ambient-intensity-slider"
-    [min]="minAmbientIntensity"
-    [max]="maxAmbientIntensity"
-    [step]="ambientIntensityStep"
+    [min]="minAmbientLightIntensity"
+    [max]="maxAmbientLightIntensity"
+    [step]="ambientLightIntensityStep"
     [value]="ambientLightIntensity"
     (input)="onAmbientLightIntensityChange($event.value)"
   ></mat-slider>

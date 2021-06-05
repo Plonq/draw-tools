@@ -1,8 +1,8 @@
 <canvas #canvas></canvas>
 <hud
   *ngIf="init"
-  [lightRotation]="lightTransform.rotation"
-  [(lightIntensity)]="light.intensity"
+  [directionalLightRotation]="lightTransform.rotation"
+  [(directionalLightIntensity)]="light.intensity"
   [(ambientLightIntensity)]="ambientLight.intensity"
   [objectRotation]="modelTransform.rotation"
 ></hud>

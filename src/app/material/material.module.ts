@@ -5,6 +5,7 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatMenuModule } from "@angular/material/menu";
 
 const materialModules = [
   MatSliderModule,
@@ -13,6 +14,7 @@ const materialModules = [
   MatIconModule,
   MatButtonModule,
   MatTooltipModule,
+  MatMenuModule,
 ];
 
 @NgModule({

@@ -29,10 +29,10 @@ import { MatSliderChange } from "@angular/material/slider";
 })
 export class HudComponent implements OnInit {
   @Input() models: ModelDefinition[];
-  @Input() lightRotation: Vector3;
-  @Output() lightRotationChange = new EventEmitter<Vector3>();
-  @Input() lightIntensity: number;
-  @Output() lightIntensityChange = new EventEmitter<number>();
+  @Input() directionalLightRotation: Vector3;
+  @Output() directionalLightRotationChange = new EventEmitter<Vector3>();
+  @Input() directionalLightIntensity: number;
+  @Output() directionalLightIntensityChange = new EventEmitter<number>();
   @Input() ambientLightIntensity: number;
   @Output() ambientLightIntensityChange = new EventEmitter<number>();
   @Input() objectRotation: Vector3;
@@ -48,12 +48,19 @@ export class HudComponent implements OnInit {
   minZRotation: number = -Math.PI;
   maxZRotation: number = Math.PI;
   rotationStep: number = 0.01;
-  minIntensity: number = 0;
-  maxIntensity: number = 3000;
-  intensityStep: number = 10;
-  minAmbientIntensity: number = 0;
-  maxAmbientIntensity: number = 1;
-  ambientIntensityStep: number = 0.001;
+  minDirectionalLightIntensity: number = 0;
+  maxDirectionalLightIntensity: number = 3000;
+  directionalLightIntensityStep: number = 10;
+  minAmbientLightIntensity: number = 0;
+  maxAmbientLightIntensity: number = 1;
+  ambientLightIntensityStep: number = 0.001;
+
+  private defaults = {
+    directionalLightIntensity: 1500,
+    ambientLightIntensity: 0.1,
+    directionalLightRotation: Vector3.Zero(),
+    objectRotation: Vector3.Zero(),
+  };
 
   @ViewChild(ModelSelectorComponent)
   private modelSelector: ModelSelectorComponent;
@@ -61,7 +68,18 @@ export class HudComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.initDefaults();
     this.loadFromQueryParams();
+  }
+
+  private initDefaults() {
+    // Sets defaults to passed in values
+    this.defaults = {
+      directionalLightIntensity: this.directionalLightIntensity,
+      ambientLightIntensity: this.ambientLightIntensity,
+      directionalLightRotation: this.directionalLightRotation.clone(),
+      objectRotation: this.objectRotation.clone(),
+    };
   }
 
   private loadFromQueryParams() {
@@ -74,24 +92,24 @@ export class HudComponent implements OnInit {
         "light-a-i",
         this.ambientLightIntensity
       );
-      this.lightIntensity = this.getParamVal(
+      this.directionalLightIntensity = this.getParamVal(
         params,
         "light-d-i",
-        this.lightIntensity
+        this.directionalLightIntensity
       );
-      this.lightIntensityChange.emit(this.lightIntensity);
+      this.directionalLightIntensityChange.emit(this.directionalLightIntensity);
       this.ambientLightIntensityChange.emit(this.ambientLightIntensity);
 
       // Objects - don't need changed emitted
-      this.lightRotation.y = this.getParamVal(
+      this.directionalLightRotation.y = this.getParamVal(
         params,
         "light-d-r-y",
-        this.lightRotation.y
+        this.directionalLightRotation.y
       );
-      this.lightRotation.z = this.getParamVal(
+      this.directionalLightRotation.z = this.getParamVal(
         params,
         "light-d-r-z",
-        this.lightRotation.z
+        this.directionalLightRotation.z
       );
       this.objectRotation.x = this.getParamVal(
         params,
@@ -114,9 +132,9 @@ export class HudComponent implements OnInit {
   private saveToQueryParams() {
     const params = new URLSearchParams();
     params.set("light-a-i", this.ambientLightIntensity.toString());
-    params.set("light-d-i", this.lightIntensity.toString());
-    params.set("light-d-r-y", this.lightRotation.y.toString());
-    params.set("light-d-r-z", this.lightRotation.z.toString());
+    params.set("light-d-i", this.directionalLightIntensity.toString());
+    params.set("light-d-r-y", this.directionalLightRotation.y.toString());
+    params.set("light-d-r-z", this.directionalLightRotation.z.toString());
     params.set("obj-r-x", this.objectRotation.x.toString());
     params.set("obj-r-y", this.objectRotation.y.toString());
     params.set("obj-r-z", this.objectRotation.z.toString());
@@ -132,15 +150,15 @@ export class HudComponent implements OnInit {
   }
 
   onLightRotation(event: MatSliderChange, type: "y" | "z") {
-    this.lightRotation[type] = -event.value;
-    this.lightIntensityChange.emit(this.lightIntensity);
+    this.directionalLightRotation[type] = -event.value;
+    this.directionalLightIntensityChange.emit(this.directionalLightIntensity);
 
     this.onChanges();
   }
 
   onLightIntensityChange(value: number) {
-    this.lightIntensity = value;
-    this.lightIntensityChange.emit(this.lightIntensity);
+    this.directionalLightIntensity = value;
+    this.directionalLightIntensityChange.emit(this.directionalLightIntensity);
 
     this.onChanges();
   }
@@ -159,6 +177,23 @@ export class HudComponent implements OnInit {
     }
     this.objectRotation[type] = val;
     this.objectRotationChange.emit(this.objectRotation);
+
+    this.onChanges();
+  }
+
+  reset() {
+    this.directionalLightIntensity = this.defaults.directionalLightIntensity;
+    this.ambientLightIntensity = this.defaults.ambientLightIntensity;
+    this.directionalLightRotation.set(
+      this.defaults.directionalLightRotation.x,
+      this.defaults.directionalLightRotation.y,
+      this.defaults.directionalLightRotation.z
+    );
+    this.objectRotation.set(
+      this.defaults.objectRotation.x,
+      this.defaults.objectRotation.y,
+      this.defaults.objectRotation.z
+    );
 
     this.onChanges();
   }
