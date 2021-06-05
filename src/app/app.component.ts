@@ -161,16 +161,4 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.light.parent = this.lightTransform;
     this.light.intensity = 1500;
   }
-
-  onLightRotationChange(rotation: Vector3) {
-    console.log(rotation);
-    this.lightTransform.rotation = rotation;
-  }
-
-  onObjectRotationChange(rotation: Vector3) {
-    console.log(rotation);
-    if (this.currentModel?.rootMesh) {
-      this.currentModel.rootMesh.rotation = rotation;
-    }
-  }
 }

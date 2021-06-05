@@ -26,7 +26,7 @@ import { MatSliderChange } from "@angular/material/slider";
   templateUrl: "hud.component.html",
   styleUrls: ["hud.component.css"],
 })
-export class HudComponent implements OnInit, OnChanges {
+export class HudComponent implements OnInit {
   @Input() models: ModelDefinition[];
   @Input() lightRotation: Vector3;
   @Output() lightRotationChange = new EventEmitter<Vector3>();
@@ -57,13 +57,9 @@ export class HudComponent implements OnInit, OnChanges {
   @ViewChild(ModelSelectorComponent)
   private modelSelector: ModelSelectorComponent;
 
-  constructor(public appService: AppService) {}
+  constructor() {}
 
   ngOnInit() {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-  }
 
   toggleVisibility() {
     this.hidden = !this.hidden;
