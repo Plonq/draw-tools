@@ -1,5 +1,5 @@
 <button class="collapse" (click)="toggleGui()">
-  {{ guiVisible ? "▼" : "▲" }}
+  {{ guiVisible ? "▼ Collapse ▼" : "▲ Expand ▲" }}
 </button>
 <div class="collapsible" [class.collapsed]="!guiVisible">
   <div class="credit">{{ (appService.currentModel$ | async)?.credit }}</div>
