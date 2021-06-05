@@ -21,7 +21,7 @@ export const MODELS: ModelDefinition[] = [
       '"Loomis Head - Planes & essential form" (https://skfb.ly/6Xprx) by cgmonkey is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).',
     thumbImg: "thumb.jpg",
     scaleCorrection: 1.7,
-    positionCorrection: new Vector3(0, 1, -0.31),
+    positionCorrection: new Vector3(1.3, 1, -0.31),
     rotationCorrection: Vector3.Zero(),
   },
   {
