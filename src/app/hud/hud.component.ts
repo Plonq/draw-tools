@@ -12,8 +12,6 @@ import { ModelSelectorComponent } from "../model-selector/model-selector.compone
 import { Vector3 } from "@babylonjs/core";
 import { MatSliderChange } from "@angular/material/slider";
 import { getQueryParam } from "../utils";
-import { Clipboard } from "@angular/cdk/clipboard";
-import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "hud",
@@ -32,7 +30,7 @@ export class HudComponent implements OnInit {
   @Output() objectRotationChange = new EventEmitter<Vector3>();
 
   @HostBinding("class.hide-controls")
-  hidden: boolean = false;
+  public hidden: boolean = false;
 
   minXRotation: number = -Math.PI;
   maxXRotation: number = Math.PI;
@@ -58,7 +56,7 @@ export class HudComponent implements OnInit {
   @ViewChild(ModelSelectorComponent)
   private modelSelector: ModelSelectorComponent;
 
-  constructor(private clipboard: Clipboard, private snackbar: MatSnackBar) {}
+  constructor() {}
 
   ngOnInit() {
     this.initDefaults();
@@ -119,7 +117,7 @@ export class HudComponent implements OnInit {
     this.saveToQueryParams();
   }
 
-  toggleVisibility() {
+  public toggleVisibility() {
     this.hidden = !this.hidden;
   }
 
@@ -155,7 +153,7 @@ export class HudComponent implements OnInit {
     this.onChanges();
   }
 
-  reset() {
+  public reset() {
     this.directionalLightIntensity = this.defaults.directionalLightIntensity;
     this.ambientLightIntensity = this.defaults.ambientLightIntensity;
     this.directionalLightRotation.set(
@@ -170,10 +168,5 @@ export class HudComponent implements OnInit {
     );
 
     this.onChanges();
-  }
-
-  share() {
-    this.clipboard.copy(window.location.href);
-    this.snackbar.open("Link copied to clipboard!", null, { duration: 3000 });
   }
 }

@@ -9,7 +9,7 @@
   color: white;
   pointer-events: none;
   grid-template-areas:
-    ". . . . toggle"
+    ". . . . ."
     ". . . . ."
     "lights . . . object"
     ". . . . ."
@@ -22,11 +22,6 @@
 
 .panel {
   pointer-events: initial;
-}
-
-.toggle {
-  grid-area: toggle;
-  text-align: right;
 }
 
 .lights {

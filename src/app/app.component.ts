@@ -26,6 +26,8 @@ import { ModelDefinition } from "./app.model";
 import { AppService } from "./app.service";
 import { filter } from "rxjs/operators";
 import { getQueryParam, setQueryParam } from "./utils";
+import { Clipboard } from "@angular/cdk/clipboard";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-root",
@@ -47,7 +49,11 @@ export class AppComponent implements OnInit, AfterContentInit {
   modelTransform: TransformNode;
   init: boolean = false;
 
-  constructor(private appService: AppService) {}
+  constructor(
+    private appService: AppService,
+    private clipboard: Clipboard,
+    private snackbar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.appService.currentModel$
@@ -178,5 +184,10 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   private saveCurrentModel() {
     setQueryParam("model", this.currentModel.id);
+  }
+
+  share() {
+    this.clipboard.copy(window.location.href);
+    this.snackbar.open("Link copied to clipboard!", null, { duration: 3000 });
   }
 }

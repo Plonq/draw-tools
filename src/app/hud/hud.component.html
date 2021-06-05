@@ -1,33 +1,3 @@
-<div class="panel toggle">
-  <button
-    mat-icon-button
-    color="accent"
-    aria-label="Toggle visibility of controls"
-    [matTooltip]="hidden ? 'Show controls' : 'Hide controls'"
-    (click)="toggleVisibility()"
-  >
-    <mat-icon>{{ hidden ? "visibility_off" : "visibility" }}</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    color="accent"
-    aria-label="Options"
-    matTooltip="Options"
-    [matMenuTriggerFor]="optionsMenu"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-menu #optionsMenu>
-    <button mat-menu-item (click)="reset()">
-      <mat-icon>restart_alt</mat-icon>
-      <span>Reset controls</span>
-    </button>
-    <button mat-menu-item (click)="share()">
-      <mat-icon>ios_share</mat-icon>
-      <span>Share (copy link to clipboard)</span>
-    </button>
-  </mat-menu>
-</div>
 <div class="panel lights toggleable">
   <h2>Light Controls</h2>
   <h3>Directional Light</h3>
