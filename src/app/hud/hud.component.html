@@ -10,6 +10,7 @@
       [step]="rotationStep"
       [value]="-directionalLightRotation.y"
       (input)="onLightRotation($event, 'y')"
+      (change)="onControlChange()"
     ></mat-slider>
     <div><label for="light-rotation-z">Z axis rotation</label></div>
     <mat-slider
@@ -19,6 +20,7 @@
       [step]="rotationStep"
       [value]="-directionalLightRotation.z"
       (input)="onLightRotation($event, 'z')"
+      (change)="onControlChange()"
     ></mat-slider>
     <div>
       <label for="direction-intensity-slider">Intensity</label>
@@ -30,6 +32,7 @@
       [step]="directionalLightIntensityStep"
       [value]="directionalLightIntensity"
       (input)="onLightIntensityChange($event.value)"
+      (change)="onControlChange()"
     ></mat-slider>
     <h3>Ambient Light</h3>
     <div><label for="ambient-intensity-slider">Intensity</label></div>
@@ -40,6 +43,7 @@
       [step]="ambientLightIntensityStep"
       [value]="ambientLightIntensity"
       (input)="onAmbientLightIntensityChange($event.value)"
+      (change)="onControlChange()"
     ></mat-slider>
   </div>
 </div>
@@ -54,6 +58,7 @@
     [step]="rotationStep"
     [value]="-objectRotation.y"
     (input)="onObjectRotation($event, 'y')"
+    (change)="onControlChange()"
   ></mat-slider>
   <div><label for="obj-rotation-pitch">Pitch (z axis)</label></div>
   <mat-slider
@@ -63,6 +68,7 @@
     [step]="rotationStep"
     [value]="-objectRotation.z"
     (input)="onObjectRotation($event, 'z')"
+    (change)="onControlChange()"
   ></mat-slider>
   <div><label for="obj-rotation-roll">Roll (x axis)</label></div>
   <mat-slider
@@ -72,5 +78,6 @@
     [step]="rotationStep"
     [value]="objectRotation.x"
     (input)="onObjectRotation($event, 'x')"
+    (change)="onControlChange()"
   ></mat-slider>
 </div>

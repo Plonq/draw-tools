@@ -102,7 +102,7 @@ export class HudComponent implements OnInit {
   }
 
   private saveToQueryParams() {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(window.location.search);
     params.set("light-a-i", this.ambientLightIntensity.toString());
     params.set("light-d-i", this.directionalLightIntensity.toString());
     params.set("light-d-r-y", this.directionalLightRotation.y.toString());
@@ -113,7 +113,7 @@ export class HudComponent implements OnInit {
     window.history.replaceState(null, null, `?${params.toString()}`);
   }
 
-  private onChanges() {
+  onControlChange() {
     this.saveToQueryParams();
   }
 
@@ -124,22 +124,16 @@ export class HudComponent implements OnInit {
   onLightRotation(event: MatSliderChange, type: "y" | "z") {
     this.directionalLightRotation[type] = -event.value;
     this.directionalLightIntensityChange.emit(this.directionalLightIntensity);
-
-    this.onChanges();
   }
 
   onLightIntensityChange(value: number) {
     this.directionalLightIntensity = value;
     this.directionalLightIntensityChange.emit(this.directionalLightIntensity);
-
-    this.onChanges();
   }
 
   onAmbientLightIntensityChange(value: number) {
     this.ambientLightIntensity = value;
     this.ambientLightIntensityChange.emit(this.ambientLightIntensity);
-
-    this.onChanges();
   }
 
   onObjectRotation(event: MatSliderChange, type: "x" | "y" | "z") {
@@ -149,8 +143,6 @@ export class HudComponent implements OnInit {
     }
     this.objectRotation[type] = val;
     this.objectRotationChange.emit(this.objectRotation);
-
-    this.onChanges();
   }
 
   public reset() {
@@ -167,6 +159,6 @@ export class HudComponent implements OnInit {
       this.defaults.objectRotation.z
     );
 
-    this.onChanges();
+    this.onControlChange();
   }
 }
