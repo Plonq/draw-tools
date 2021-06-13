@@ -1,19 +1,15 @@
 :host {
   position: fixed;
-  top: 50px;
+  top: 64px; // Same height as mat-toolbar
   bottom: 0;
   left: 0;
   right: 0;
-  display: grid;
   padding: 24px;
   color: white;
   pointer-events: none;
-  grid-template-areas:
-    ". . . . ."
-    ". . . . ."
-    "lights . . . object"
-    ". . . . ."
-    ". . . . .";
+  display: flex;
+  justify-content: space-between;
+
 
   &.hide-controls .toggleable {
     display: none;
@@ -25,10 +21,8 @@
 }
 
 .lights {
-  grid-area: lights;
 }
 
 .object {
-  grid-area: object;
   text-align: right;
 }

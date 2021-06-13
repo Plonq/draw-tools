@@ -1,45 +1,47 @@
-<div class="panel lights toggleable">
-  <h2>Light Controls</h2>
-  <h3>Directional Light</h3>
-  <div><label for="light-rotation-y">Y axis rotation</label></div>
-  <mat-slider
-    id="light-rotation-y"
-    [min]="minYRotation"
-    [max]="maxYRotation"
-    [step]="rotationStep"
-    [value]="-directionalLightRotation.y"
-    (input)="onLightRotation($event, 'y')"
-  ></mat-slider>
-  <div><label for="light-rotation-z">Z axis rotation</label></div>
-  <mat-slider
-    id="light-rotation-z"
-    [min]="minZRotation"
-    [max]="maxZRotation"
-    [step]="rotationStep"
-    [value]="-directionalLightRotation.z"
-    (input)="onLightRotation($event, 'z')"
-  ></mat-slider>
-  <div>
-    <label for="direction-intensity-slider">Intensity</label>
+<div class="panel">
+  <div class="lights toggleable">
+    <h2>Light Controls</h2>
+    <h3>Directional Light</h3>
+    <div><label for="light-rotation-y">Y axis rotation</label></div>
+    <mat-slider
+      id="light-rotation-y"
+      [min]="minYRotation"
+      [max]="maxYRotation"
+      [step]="rotationStep"
+      [value]="-directionalLightRotation.y"
+      (input)="onLightRotation($event, 'y')"
+    ></mat-slider>
+    <div><label for="light-rotation-z">Z axis rotation</label></div>
+    <mat-slider
+      id="light-rotation-z"
+      [min]="minZRotation"
+      [max]="maxZRotation"
+      [step]="rotationStep"
+      [value]="-directionalLightRotation.z"
+      (input)="onLightRotation($event, 'z')"
+    ></mat-slider>
+    <div>
+      <label for="direction-intensity-slider">Intensity</label>
+    </div>
+    <mat-slider
+      id="direction-intensity-slider"
+      [min]="minDirectionalLightIntensity"
+      [max]="maxDirectionalLightIntensity"
+      [step]="directionalLightIntensityStep"
+      [value]="directionalLightIntensity"
+      (input)="onLightIntensityChange($event.value)"
+    ></mat-slider>
+    <h3>Ambient Light</h3>
+    <div><label for="ambient-intensity-slider">Intensity</label></div>
+    <mat-slider
+      id="ambient-intensity-slider"
+      [min]="minAmbientLightIntensity"
+      [max]="maxAmbientLightIntensity"
+      [step]="ambientLightIntensityStep"
+      [value]="ambientLightIntensity"
+      (input)="onAmbientLightIntensityChange($event.value)"
+    ></mat-slider>
   </div>
-  <mat-slider
-    id="direction-intensity-slider"
-    [min]="minDirectionalLightIntensity"
-    [max]="maxDirectionalLightIntensity"
-    [step]="directionalLightIntensityStep"
-    [value]="directionalLightIntensity"
-    (input)="onLightIntensityChange($event.value)"
-  ></mat-slider>
-  <h3>Ambient Light</h3>
-  <div><label for="ambient-intensity-slider">Intensity</label></div>
-  <mat-slider
-    id="ambient-intensity-slider"
-    [min]="minAmbientLightIntensity"
-    [max]="maxAmbientLightIntensity"
-    [step]="ambientLightIntensityStep"
-    [value]="ambientLightIntensity"
-    (input)="onAmbientLightIntensityChange($event.value)"
-  ></mat-slider>
 </div>
 <div class="panel object toggleable">
   <h2>Object Controls</h2>
