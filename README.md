@@ -1,21 +1,11 @@
-![Angular Logo](https://github.com/vercel/vercel/blob/master/packages/frameworks/logos/angular.svg)
+# Drawing Helper
 
-# Angular Example
+This is a 3D model viewer designed to act as a drawing reference, to practice drawing faces/heads.
+You can change the lighting, and adjust 3 axes (rotation, tilt, yaw).
+Includes a Loomis head, a 'planes' head, and a skull.
 
-This directory is a brief example of an [Angular](https://angular.io/) app that can be deployed with Vercel and zero configuration.
+It's slightly buggy, but I lost interest in drawing so I abandoned this.
 
-## Deploy Your Own
+## Demo
 
-Deploy your own Angular project with Vercel.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vercel/vercel/tree/main/examples/angular)
-
-_Live Example: https://angular.now-examples.now.sh_
-
-### How We Created This Example
-
-To get started with Angular, you can use the [Angular CLI](https://cli.angular.io/) to initialize the project:
-
-```shell
-$ ng new
-```
+https://draw.plonq.org
